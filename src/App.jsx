@@ -1,33 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import {Routes, Route } from "react-router-dom";
+import Account from "./pages/Account.jsx"
+import Dashboard from "./pages/Dashboard"
+import Inspiration from "./pages/Inspiration"
+import Login from "./pages/Login"
+import Planner from "./pages/Planner"
+import PublicFeed from "./pages/PublicFeed"
+import Register from "./pages/Register"
+import TaskPage from "./pages/TaskPage"
+import MyTrips from "./pages/MyTrips"
+import TripDetails from "./Pages/TripDetails"
+import NavBar from './components/NavBar';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [token, setToken] = useState ();
+  const [userId, setUserId] = useState ();
+
+  //     //set token in localStorage
+  //   useEffect(() => {
+  //     const invalidTokens = ['Not authorized.', "Unable to login"];
+
+  //     if (token && !invalidTokens.includes(token)) {
+  //       localStorage.setItem("token", token);
+  //     } else {
+  //       localStorage.removeItem("token");
+  //     }
+  //   }, [token]);
+
+
+  //     //retrieve token from localStorage
+  //     useEffect(()=>{
+  //       const storedToken = localStorage.getItem("token");
+  //       if (storedToken){setToken(storedToken)}
+  //     },[]);
+
+  //     //set user in localStorage
+  // useEffect(() => {
+  //   if (token)
+  //     {localStorage.setItem("userId", userId)
+  //   }else{
+  //     localStorage.removeItem("userId")
+  //   }
+  // }, [userId]);
+
+
+  //     //retrieve user from localStorage
+  // useEffect(()=>{
+  //   const storedUserId = localStorage.getItem("userId");
+  //   if (storedUserId){setUserId(storedUserId)}
+  // },[]);
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>  
+    <NavBar token={token} setToken={setToken} setUserId={setUserId} userId={userId}/>
+    </div>
+    
+      <Routes>
+        <Route path="/trips/public" element={<PublicFeed/>} />
+        <Route path="/inspiration" element={<Inspiration/>} />
+        <Route path="/trips/new" element={<Planner/>} />
+        <Route path="/trips/user/:id" element={<MyTrips/>} />
+        <Route path="/trips/trip/:id" element={<TripDetails/>} />
+        <Route path="/tasks/:id" element={<TaskPage/>} />
+        <Route path="/users/:id" element={<Account/>}/>
+        <Route path="/users/login" element={<Login token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>} />
+        <Route path = "/users/register" element = {<Register/>}/>
+        <Route path="*" element={<Dashboard/>} />
+      </Routes>
+    
     </>
   )
 }
