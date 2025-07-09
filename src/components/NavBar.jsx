@@ -43,7 +43,7 @@ const logout = () => {
             </>
             : 
             <div>
-            <Link to="/" className="navLink"> Home Logo </Link>
+            <Link to="/" className="navLink"> <img src='/logo.png' alt="logo" width="100" height="100"/> </Link>
 
             <Link to="/trips/public" className="navLink"> Public Trips </Link>
 
