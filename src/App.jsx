@@ -17,23 +17,21 @@ function App() {
   const [token, setToken] = useState ();
   const [userId, setUserId] = useState ();
 
-  //     //set token in localStorage
-  //   useEffect(() => {
-  //     const invalidTokens = ['Not authorized.', "Unable to login"];
-
-  //     if (token && !invalidTokens.includes(token)) {
-  //       localStorage.setItem("token", token);
-  //     } else {
-  //       localStorage.removeItem("token");
-  //     }
-  //   }, [token]);
+      //set token in localStorage
+    useEffect(() => {
+      if (token) {
+        localStorage.setItem("token", token);
+      } else {
+        localStorage.removeItem("token");
+      }
+    }, [token]);
 
 
-  //     //retrieve token from localStorage
-  //     useEffect(()=>{
-  //       const storedToken = localStorage.getItem("token");
-  //       if (storedToken){setToken(storedToken)}
-  //     },[]);
+      //retrieve token from localStorage
+      useEffect(()=>{
+        const storedToken = localStorage.getItem("token");
+        if (storedToken){setToken(storedToken)}
+      },[]);
 
   //     //set user in localStorage
   // useEffect(() => {
