@@ -1,13 +1,13 @@
 import { useState } from "react"
 
-export default function Login({setToken}){
+export default function Login({ Token, setToken, UserId, setUserId}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     async function handleSubmit (event){
     event.preventDefault();
     try{
-        const response = await fetch ("http://localhost:3000/api/login", {
+        const response = await fetch ("http://localhost:3000/auth/login", {
             method: "POST",
             headers: {'Content-type':'application/json'},
             body: JSON.stringify({
@@ -17,17 +17,10 @@ export default function Login({setToken}){
         });
         const result = await response.json();
         setToken(result.accessToken);
+        setUserId(result.id)
     }catch(error){
         console.log(error)
     };
-    // try {
-    //     const res = await fetch(`http://localhost:4000/users/login/getInfo/${username}`);
-    //     const data = await res.json();
-    //     console.log(data);
-    //     setUserId(data.id);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
     };
 
     return(

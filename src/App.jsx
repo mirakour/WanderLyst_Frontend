@@ -9,7 +9,7 @@ import PublicFeed from "./pages/PublicFeed"
 import Register from "./pages/Register"
 import TaskPage from "./pages/TaskPage"
 import MyTrips from "./pages/MyTrips"
-import TripDetails from "./Pages/TripDetails"
+import TripDetails from "./pages/TripDetails"
 import NavBar from './components/NavBar';
 import './App.css'
 
@@ -33,21 +33,21 @@ function App() {
         if (storedToken){setToken(storedToken)}
       },[]);
 
-  //     //set user in localStorage
-  // useEffect(() => {
-  //   if (token)
-  //     {localStorage.setItem("userId", userId)
-  //   }else{
-  //     localStorage.removeItem("userId")
-  //   }
-  // }, [userId]);
+      //set user in localStorage
+      useEffect(() => {
+        if (token)
+          {localStorage.setItem("userId", userId)
+        }else{
+          localStorage.removeItem("userId")
+        }
+      }, [userId]);
 
 
-  //     //retrieve user from localStorage
-  // useEffect(()=>{
-  //   const storedUserId = localStorage.getItem("userId");
-  //   if (storedUserId){setUserId(storedUserId)}
-  // },[]);
+      //retrieve user from localStorage
+      useEffect(()=>{
+        const storedUserId = localStorage.getItem("userId");
+        if (storedUserId){setUserId(storedUserId)}
+      },[]);
 
 
   return (
@@ -57,15 +57,15 @@ function App() {
     </div>
     
       <Routes>
-        <Route path="/trips/public" element={<PublicFeed/>} />
+        <Route path="/trip/public" element={<PublicFeed/>} />
         <Route path="/inspiration" element={<Inspiration/>} />
-        <Route path="/trips/new" element={<Planner/>} />
-        <Route path="/trips/user/:id" element={<MyTrips/>} />
-        <Route path="/trips/trip/:id" element={<TripDetails/>} />
+        <Route path="/trip/new" element={<Planner/>} />
+        <Route path="/trip/user/:id" element={<MyTrips/>} />
+        <Route path="/trip/trip/:id" element={<TripDetails/>} />
         <Route path="/tasks/:id" element={<TaskPage/>} />
-        <Route path="/users/:id" element={<Account/>}/>
+        <Route path="/users/:id" element={<Account token={token}/>}/>
         <Route path="/users/login" element={<Login token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>} />
-        <Route path = "/users/register" element = {<Register/>}/>
+        <Route path = "/users/register" element = {<Register token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>}/>
         <Route path="*" element={<Dashboard/>} />
       </Routes>
     

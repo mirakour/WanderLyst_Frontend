@@ -13,7 +13,7 @@ const logout = () => {
             <>
             <Link to="/" className="navLink"> <img src='/logo.png' alt="logo" width="100" height="100"/> </Link>
 
-            <Link to="/trips/public" className="navLink">
+            <Link to="/trip/public" className="navLink">
             Public Trips
             </Link>
 
@@ -21,19 +21,19 @@ const logout = () => {
             Inspiration
             </Link>
 
-            <Link to={`/trips/new`} className="navLink">
+            <Link to={`/trip/new`} className="navLink">
             Plan a Trip
             </Link>
 
-            <Link to={`/trips/user/${(userId)}`} className="navLink">
+            <Link to={`/trip/user/${(userId)}`} className="navLink">
             My Trips
             </Link>
 
-            <Link to={`/trips/${(userId)}`} className="navLink">
+            <Link to={`/trip/${(userId)}`} className="navLink">
             My Tasks
             </Link>
 
-            <Link to={`/users/${(userId)}`} className="navLink">
+            <Link to={`/users/me`} className="navLink">
             My Account
             </Link>
 
@@ -43,7 +43,7 @@ const logout = () => {
             <div>
             <Link to="/" className="navLink"> <img src='/logo.png' alt="logo" width="100" height="100"/> </Link>
 
-            <Link to="/trips/public" className="navLink"> Public Trips </Link>
+            <Link to="/trip/public" className="navLink"> Public Trips </Link>
 
             <Link to="/inspiration" className="navLink"> Inspiration </Link>
 

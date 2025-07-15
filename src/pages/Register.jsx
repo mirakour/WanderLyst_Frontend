@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function Register(){
-    const [username, setUsername] = useState("");
+export default function Register({setToken}){
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("")
 
@@ -10,18 +10,18 @@ export default function Register(){
         event.preventDefault();
 
         try{
-            const response = await fetch ("http://localhost:3000/api/register", {
+            const response = await fetch ("http://localhost:3000/auth/register", {
                 method: "POST",
                 headers: {'Content-type':'application/json'},
                 body: JSON.stringify({
                     email: email,
-                    name: username,
+                    name: name,
                     password: password
                 })
             })
 
             const result = await response.json();
-
+            setToken(result.accessToken)
         } catch (error){
             console.log(error)
         };
@@ -35,22 +35,12 @@ export default function Register(){
         {
             <form onSubmit={handleSubmit}>
                 <label className="userTitle">
-                    Username: 
+                    Full Name: 
                         <input
-                            name ="username"
+                            name ="name"
                             required
-                            onChange = {(e)=>setUsername(e.target.value)}
-                            value = {username}
-                        />
-                </label>
-                <br/><br/>
-                <label className="passTitle">
-                    Password: 
-                        <input
-                            name = "password"
-                            required
-                            onChange = {(e)=>setPassword(e.target.value)}
-                            value={password}
+                            onChange = {(e)=>setName(e.target.value)}
+                            value = {name}
                         />
                 </label>
                 <br/><br/>
@@ -61,6 +51,16 @@ export default function Register(){
                             required
                             onChange = {(e)=>setEmail(e.target.value)}
                             value={email}
+                        />
+                </label>
+                <br/><br/>
+                <label className="passTitle">
+                    Password: 
+                        <input
+                            name = "password"
+                            required
+                            onChange = {(e)=>setPassword(e.target.value)}
+                            value={password}
                         />
                 </label>
                 <br/><br/>
