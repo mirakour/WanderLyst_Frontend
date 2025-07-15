@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
 
-export default function PublicFeed(){
+export default function publicFeed(){
     const [trips, setTrips] = useState([])
     
     useEffect(()=>{
@@ -20,17 +20,18 @@ export default function PublicFeed(){
 
     return(
         <>
-            <div className="publicTripGrid">
+            <h1>Public Trips</h1>        
+            {/* <div className="publicTripGrid">
                 {trips.map((trip) => (
 
                             
-            <Link to={`/api/trip/${trip.id}`}>
+            // <Link to={`/api/trip/${trip.id}`}>
             <div key={trip.id} className="tripCard">
                 <h3 className="tripTitle">{trip.title}</h3>
             </div>
-            </Link>
+            // </Link>
             ))}  
-            </div>
+            </div> */}
         </>
     )
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Register(){
+export default function Register({setToken}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("")
@@ -21,7 +21,7 @@ export default function Register(){
             })
 
             const result = await response.json();
-
+            setToken(result.accessToken)
         } catch (error){
             console.log(error)
         };
