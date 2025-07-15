@@ -33,21 +33,21 @@ function App() {
         if (storedToken){setToken(storedToken)}
       },[]);
 
-  //     //set user in localStorage
-  // useEffect(() => {
-  //   if (token)
-  //     {localStorage.setItem("userId", userId)
-  //   }else{
-  //     localStorage.removeItem("userId")
-  //   }
-  // }, [userId]);
+      //set user in localStorage
+      useEffect(() => {
+        if (token)
+          {localStorage.setItem("userId", userId)
+        }else{
+          localStorage.removeItem("userId")
+        }
+      }, [userId]);
 
 
-  //     //retrieve user from localStorage
-  // useEffect(()=>{
-  //   const storedUserId = localStorage.getItem("userId");
-  //   if (storedUserId){setUserId(storedUserId)}
-  // },[]);
+      //retrieve user from localStorage
+      useEffect(()=>{
+        const storedUserId = localStorage.getItem("userId");
+        if (storedUserId){setUserId(storedUserId)}
+      },[]);
 
 
   return (

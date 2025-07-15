@@ -21,7 +21,7 @@ export default function publicFeed(){
     return(
         <>
             <h1>Public Trips</h1>        
-            {/* <div className="publicTripGrid">
+            <div className="publicTripGrid">
                 {trips.map((trip) => (
 
                             
@@ -31,7 +31,7 @@ export default function publicFeed(){
             </div>
             // </Link>
             ))}  
-            </div> */}
+            </div>
         </>
     )
 }

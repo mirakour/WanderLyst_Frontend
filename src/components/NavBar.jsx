@@ -33,7 +33,7 @@ const logout = () => {
             My Tasks
             </Link>
 
-            <Link to={`/users/${(userId)}`} className="navLink">
+            <Link to={`/users/me`} className="navLink">
             My Account
             </Link>
 
