@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Login({ Token, setToken, UserId, setUserId}){
+export default function Login({ token, setToken, userId, setUserId}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -17,7 +17,8 @@ export default function Login({ Token, setToken, UserId, setUserId}){
         });
         const result = await response.json();
         setToken(result.accessToken);
-        setUserId(result.id)
+        setUserId(result.user.id)
+        console.log(result.user.id)
     }catch(error){
         console.log(error)
     };

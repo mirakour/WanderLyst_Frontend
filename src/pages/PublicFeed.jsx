@@ -17,6 +17,7 @@ export default function publicFeed(){
         }
         fetchTrips();
     }, []);
+    console.log(trips)
 
     return(
         <>
@@ -25,11 +26,12 @@ export default function publicFeed(){
                 {trips.map((trip) => (
 
                             
-            // <Link to={`/api/trip/${trip.id}`}>
             <div key={trip.id} className="tripCard">
+            <Link to={`/api/trip/${trip.id}`}>
+
                 <h3 className="tripTitle">{trip.title}</h3>
+            </Link>    
             </div>
-            // </Link>
             ))}  
             </div>
         </>
