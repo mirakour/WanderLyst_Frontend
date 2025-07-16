@@ -2,9 +2,8 @@ import {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
 
-export default function Account(){
+export default function Account( {token, setUserId } ){
     const [user, setUser] = useState({})
-    const token = localStorage.getItem("token")
     
     useEffect(()=>{
         const fetchTrips = async () => {

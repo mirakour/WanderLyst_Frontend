@@ -60,7 +60,7 @@ function App() {
         <Route path="/trip/public" element={<PublicFeed/>} />
         <Route path="/inspiration" element={<Inspiration/>} />
         <Route path="/trip/new" element={<Planner/>} />
-        <Route path="/trip/user/:id" element={<MyTrips/>} />
+        <Route path="/trip/user/:id" element={<MyTrips token={token}/>} />
         <Route path="/trip/trip/:id" element={<TripDetails/>} />
         <Route path="/tasks/:id" element={<TaskPage/>} />
         <Route path="/users/:id" element={<Account token={token}/>}/>
