@@ -1,62 +1,39 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import logo from "/logo.png";
 
-function NavBar ({token, setToken, setUserId, userId}){
-
-const logout = () => {
+export default function NavBar({ token, setToken, setUserId, userId }) {
+  const logout = () => {
     setToken(null);
-    setUserId(null)
-};
+    setUserId(null);
+  };
 
-    return(
-    <div className="navItems">
-        {token ? 
-            <>
-            <Link to="/" className="navLink"> <img src='/logo.png' alt="logo" width="100" height="100"/> </Link>
+  return (
+    <nav className="navbar">
+      <div className="navbar-left">
+        <Link to="/" className="navLink">Home</Link>
+        <Link to="/inspiration" className="navLink">Inspiration</Link>
+        <Link to="/trip/public" className="navLink">Public Trips</Link>
+      </div>
 
-            <Link to="/trip/public" className="navLink">
-            Public Trips
-            </Link>
+      <div className="navbar-center">
+        <img src={logo} alt="logo" />
+        <h1>WanderLyst</h1>
+      </div>
 
-            <Link to="/inspiration" className="navLink">
-            Inspiration
-            </Link>
-
-            <Link to={`/trip/new`} className="navLink">
-            Plan a Trip
-            </Link>
-
-            <Link to={`/trip/user/${(userId)}`} className="navLink">
-            My Trips
-            </Link>
-
-            <Link to={`/trip/${(userId)}`} className="navLink">
-            My Tasks
-            </Link>
-
-            <Link to={`/users/me`} className="navLink">
-            My Account
-            </Link>
-
-            <button onClick={logout} className="button">Logout</button>
-            </>
-            : 
-            <div>
-            <Link to="/" className="navLink"> <img src='/logo.png' alt="logo" width="100" height="100"/> </Link>
-
-            <Link to="/trip/public" className="navLink"> Public Trips </Link>
-
-            <Link to="/inspiration" className="navLink"> Inspiration </Link>
-
-            <Link to="/users/login" className="navLink"> Plan a Trip </Link>
-
-            <Link to="/users/login" className="navLink"> Login </Link>
-            
-            <Link to="/users/register" className="navLink"> Register </Link> 
-            </div>
-        }
-        </div>
-    )
-
+      <div className="navbar-right">
+        {token ? (
+          <>
+            <Link to="/trip/new" className="navLink">Trip Planner</Link>
+            <Link to={`/users/${userId}`} className="navLink">My Account</Link>
+            <button onClick={logout} className="navLink">Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/users/login" className="navLink">Login</Link>
+            <Link to="/users/register" className="navLink">Register</Link>
+          </>
+        )}
+      </div>
+    </nav>
+  );
 }
-
-export default NavBar
