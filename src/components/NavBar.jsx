@@ -29,10 +29,6 @@ const logout = () => {
             My Trips
             </Link>
 
-            <Link to={`/trip/${(userId)}`} className="navLink">
-            My Tasks
-            </Link>
-
             <Link to={`/users/me`} className="navLink">
             My Account
             </Link>
