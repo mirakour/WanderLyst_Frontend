@@ -1,8 +1,11 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function Login({ token, setToken, userId, setUserId}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navagate = useNavigate();
+
 
     async function handleSubmit (event){
     event.preventDefault();
@@ -17,8 +20,7 @@ export default function Login({ token, setToken, userId, setUserId}){
         });
         const result = await response.json();
         setToken(result.accessToken);
-        setUserId(result.user.id)
-        console.log(result.user.id)
+        navagate("/");        
     }catch(error){
         console.log(error)
     };

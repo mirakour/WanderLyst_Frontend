@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Register({setToken}){
+export default function Register({setToken}) {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("")
-
+    const [userId, setUserID] = useState("")
+    const navigate = useNavigate();
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -22,6 +24,8 @@ export default function Register({setToken}){
 
             const result = await response.json();
             setToken(result.accessToken)
+            console.log(result.accessToken);
+            navigate("/");
         } catch (error){
             console.log(error)
         };
