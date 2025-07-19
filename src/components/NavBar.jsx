@@ -17,7 +17,7 @@ export default function NavBar({ token, setToken, setUserId, userId }) {
 
       <div className="navbar-center">
         <img src={logo} alt="logo" />
-        <h1>WanderLyst</h1>
+        <h1 className="navbar-title">WanderLyst</h1>
       </div>
 
       <div className="navbar-right">
