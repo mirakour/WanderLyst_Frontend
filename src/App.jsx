@@ -12,6 +12,7 @@ import TaskPage from "./pages/TaskPage"
 import MyTrips from "./pages/MyTrips"
 import TripDetails from "./pages/TripDetails"
 import NavBar from './components/NavBar';
+import Events from './components/Events.jsx';
 import './App.css'
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
     </div>
     
       <Routes>
+        <Route path="/trip/:tripId/events" element={<Events token={token}/>} />
         <Route path="/trip/public" element={<PublicFeed/>} />
         <Route path="/trip/public/:id" element={<PublicTripDetails token={token}/>} />
         <Route path="/inspiration" element={<Inspiration/>} />
