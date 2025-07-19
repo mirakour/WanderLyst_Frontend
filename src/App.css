@@ -40,3 +40,75 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Navbar layout and styling */ 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 98%;
+  height: 70px;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.navbar-center img {
+  width: 60px;
+  height: 60px;
+}
+
+.navbar-center h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-shrink: 0;
+  min-width: 180px;
+  white-space: nowrap;
+}
+
+.navLink {
+  font-weight: bold;
+  color: #ccc;
+  text-decoration: none;
+  transition: all 0.3s;
+  padding: 0.4em 0.8em;
+  border-radius: 8px;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  border: 1px solid #646cff;
+  background-color: #2e2e2e;
+}
+
+/* Adjust body padding so content sits below the navbar */
+body {
+  padding-top: 70px;
+
+}
