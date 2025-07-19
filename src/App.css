@@ -164,3 +164,19 @@
 .join-button:hover {
   background-color: #333;
 }
+
+.account {
+  width: 80vw;
+}
+
+.tripCard{
+  border: 1px solid black;
+  border-radius: 25px;
+  margin-bottom: 10px;
+}
+
+.tripCard:hover {
+  color: #ffffff;
+  border: 1px solid #646cff;
+  background-color: #2e2e2e;
+}

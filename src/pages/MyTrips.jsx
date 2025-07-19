@@ -48,8 +48,10 @@ export default function MyTrips( {token} ){
                             
             <div key={trip.id} className="tripCard">
             <Link to={`/trip/trip/${trip.id}`}>
-
+                <span>
                 <h3 className="tripTitle">{trip.title}</h3>
+                <p>{trip.start_date} until {trip.end_date}</p>
+                </span>
             </Link>    
             </div>
             ))}  

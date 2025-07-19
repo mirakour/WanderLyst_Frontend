@@ -28,11 +28,11 @@ export default function Account( {token, setUserId } ){
         <div>
         {token  ?        
             <div className="account"> 
-                <h1>Account Information</h1>
+                <h1>Hey {user.name}, here's the plan</h1>
                 <div className="userDetails">
                 <h3 className="Username">{user.name}</h3>
                 </div>
-        <MyTrips token={token}/>
+            <MyTrips token={token}/>
             </div>
             :
             <>
