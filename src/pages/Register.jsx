@@ -25,7 +25,7 @@ export default function Register({setToken}) {
             const result = await response.json();
             setToken(result.accessToken)
             console.log(result.accessToken);
-            navigate("/");
+            navigate("/users/me");
         } catch (error){
             console.log(error)
         };
