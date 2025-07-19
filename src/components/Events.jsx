@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 export default function Events(passedData){
-
+    const { tripId } = useParams();
     const [eventsList, setEventsList] = useState(null) //this varible holds a list of all the events
     
     const [title, setTitle] = useState(null)
@@ -10,9 +11,9 @@ export default function Events(passedData){
 
     async function getEvents() {
         try{
-            const response = await fetch(`URL-goes-here/api/trips/${passedData.tripIdPlaceHolder}/events`,{
+            const response = await fetch(`http://localhost:3000/api/trip/${tripId}/events`,{
                 headers: { 
-                    "Authorization":  `Bearer ${passedData.tokenPlaceHolder}`
+                    "Authorization":  `Bearer ${passedData.token}`
                 }
             })
             const rawData = await response.json()
@@ -21,9 +22,7 @@ export default function Events(passedData){
             setEventsList(rawData.map((item) => {
                 return <div id="EventListing" key={item.id}>
                     <h3>{item.title}</h3>
-                    <br></br>
                     <p>Location: {item.location}</p>
-                    <br></br>
                     <p>Status: {item.status}</p>
                 </div>
             }))
@@ -35,11 +34,6 @@ export default function Events(passedData){
     useEffect(() => {
        getEvents() 
     },[]);
-
-    function handleClick(){
-        //code to go back to TripBoard
-        console.log("button works")
-    }
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -65,7 +59,9 @@ export default function Events(passedData){
     return(
     <>
         <h2>Events</h2>
-        <button onClick={handleClick}>Go Back</button>
+        <Link to={`../trip/trip/${tripId}`}>
+        <button>Go Back</button>
+        </Link>
         {eventsList && <div>{eventsList}</div>}
         
         <h3>Create New Event</h3>
@@ -79,8 +75,10 @@ export default function Events(passedData){
             </label>
             <br></br>
             <label id="formContent">
-                Event Location: <input value={status} onChange={(e) => setStatus(e.target.value)}/>
+                Event Status: <input value={status} onChange={(e) => setStatus(e.target.value)}/>
             </label>
+            <br></br>
+            <button id="formContent">Submit</button>
         </form>
     </>
     )

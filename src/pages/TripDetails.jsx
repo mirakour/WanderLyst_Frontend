@@ -88,7 +88,9 @@ export default function TripDetails({ token }) {
                             <h3>Events</h3>
 							{events.map((event) => (
 								<div key={event.id} className="tripEventCard">
+									<Link to={`/trip/${id}/events`}>
 									<p>{event.title}</p>
+									</Link>
 								</div>
 							))}
 						</div>
