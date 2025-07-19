@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 export default function TripDetails({ token }) {
 	const { id } = useParams();
 	const [trip, setTrip] = useState({});
-	const [events, setEvents] = useState([]);
+	const [events, setEvents] = useState(null);
 	const [tripMembers, setTripMembers] = useState([]);
 
 	useEffect(() => {
@@ -33,11 +33,7 @@ export default function TripDetails({ token }) {
 					}
 				);
 				const data = await res.json();
-				console.log(`members data = ${data}`);
-				console.log(data);
 				setTripMembers(data);
-				console.log(`members = ${tripMembers}`);
-				console.log(tripMembers);
 			} catch (err) {
 				console.error(err);
 			}
@@ -52,11 +48,7 @@ export default function TripDetails({ token }) {
 					}
 				);
 				const data = await res.json();
-				console.log(`events data = ${data}`);
-				console.log(data);
 				setEvents(data);
-				console.log(`events = ${events}`);
-				console.log(events);
 			} catch (err) {
 				console.error(err);
 			}
@@ -91,12 +83,14 @@ export default function TripDetails({ token }) {
 						</>
 					)}
 
-					{!events.length === 0 ? (
+					{events ? (
 						<div className="EventsGrid">
                             <h3>Events</h3>
 							{events.map((event) => (
 								<div key={event.id} className="tripEventCard">
+									<Link to={`/trip/${id}/events`}>
 									<p>{event.title}</p>
+									</Link>
 								</div>
 							))}
 						</div>
