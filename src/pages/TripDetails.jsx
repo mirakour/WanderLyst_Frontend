@@ -76,7 +76,7 @@ export default function TripDetails({ token }) {
 					<h2>Trip Members</h2>
 					<TripMembers token={token} />
 
-					<Events token={token} tripId={id}/>
+					<Events token={token} tripId={id} canMakeEvent={true}/>
 				</>
 			) : (
 				<>

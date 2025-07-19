@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 export default function Events(passedData){
     const [message, setMessage] = useState(null)
     const [eventsList, setEventsList] = useState([]) //this varible holds a list of all the events
-    
+
     const [showForm, setShowForm] = useState(false)
     const [title, setTitle] = useState(null)
     const [location, setLocation] = useState(null)
@@ -102,13 +102,13 @@ export default function Events(passedData){
                 <div>
                     <h2>What's on the agenda?</h2>
                     {eventsList}
-                    <button onClick={handleFormButton}>Create New Event</button>
+                    {passedData.canMakeEvent && <button onClick={handleFormButton}>Create New Event</button>}
                 </div> 
                 :
                 <div>
                     <h2>What's on the agenda?</h2>
                     <p>This trip has no agenda</p>
-                    <button onClick={handleFormButton}>Create New Event</button>
+                    {passedData.canMakeEvent && <button onClick={handleFormButton}>Create New Event</button>}
                 </div> 
         }
 
