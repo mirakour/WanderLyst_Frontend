@@ -1,10 +1,16 @@
 import {useEffect, useState} from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import TripForm from "../components/TripForm";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import TripForm from "../components/TripForm";
 
 
 export default function MyTrips( {token} ){
     const [trips, setTrips] = useState([])
+    const navigate = useNavigate()
+    
+
+
     const navigate = useNavigate()
     
 
@@ -27,10 +33,17 @@ export default function MyTrips( {token} ){
 
 
 
+
+
     if (!token) {
         return(
         <>
         <h1>Hmm...</h1>
+        <Link to="/users/login" replace>
+            <h2>Please Login To See Your Trips</h2>
+        </Link>
+
+
         <Link to="/users/login" replace>
             <h2>Please Login To See Your Trips</h2>
         </Link>
@@ -41,17 +54,21 @@ export default function MyTrips( {token} ){
     }else return(
         <>
             {trips.length > 0 && token ?        
+            {trips.length > 0 && token ?        
             <div className="MyTripsGrid">
             <h2>My Trips</h2>
                 {trips.map((trip) => (
 
                             
             <div key={trip.id} className="tripCard">
-            <Link to={`/trip/trip/${trip.id}`}>
-                <span>
                 <h3 className="tripTitle">{trip.title}</h3>
-                <p>{trip.start_date} until {trip.end_date}</p>
-                </span>
+                <p className="tripDates">
+                    {trip.start_date ? new Date(trip.start_date).toLocaleDateString() : "N/A"}  
+                    -
+                    {trip.end_date ? new Date(trip.end_date).toLocaleDateString() : "N/A"}
+                </p>
+            <Link to={`/trip/${trip.id}`}>
+                <p>See Trip Details</p>
             </Link>    
             </div>
             ))}  
