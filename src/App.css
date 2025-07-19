@@ -165,19 +165,63 @@
   background-color: #333;
 }
 
-.account{
-  margin-top: 169px;
-  width: 80vw;
+/* Inspiration page styles */
+
+.inspiration-container {
+  text-align: center;
+  padding: 2rem;
+  color: #ccc;
 }
 
-.tripCard{
-  border: solid 1px #ccc;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.inspiration-container h2 {
+  margin-top: 4rem;
 }
 
-.tripCard:hover {
-  color: #ffffff;
-  border: 1px solid #646cff;
+.inspiration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 8rem;
+  justify-items: center;
+  margin-top: 1rem;
+}
+
+.inspiration-box {
   background-color: #2e2e2e;
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 8000px;
+}
+
+.inspiration-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.inspiration-box h3 {
+  margin: 0.5rem 0 0.2rem 0;
+}
+
+.inspiration-box p {
+  margin: 0.6rem 0;
+}
+
+.cta {
+  margin-top: 2rem;
+}
+
+.join-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.join-button:hover {
+  background-color: #333;
 }
