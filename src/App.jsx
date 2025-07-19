@@ -65,7 +65,7 @@ function App() {
         <Route path="/trip/user/:id" element={<MyTrips token={token}/>} />
         <Route path="/trip/trip/:id" element={<TripDetails token={token}/>} />
         <Route path="/tasks/:id" element={<TaskPage/>} />
-        <Route path="/users/:id" element={<Account token={token}/>}/>
+        <Route path="/users/me" element={<Account token={token}/>}/>
         <Route path="/users/login" element={<Login token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>} />
         <Route path = "/users/register" element = {<Register token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>}/>
         <Route path="*" element={<Dashboard/>} />
