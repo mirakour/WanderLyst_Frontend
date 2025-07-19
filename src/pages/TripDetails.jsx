@@ -77,27 +77,7 @@ export default function TripDetails({ token }) {
 					<TripMembers token={token} />
 
 					<h2>What's on the agenda?</h2>
-					{!events.length === 0  ? (
-						<div className="EventsGrid">
-							<Link to={`/trip/${id}/events`}>
-                            <h3>Events</h3>
-							</Link>
-							{events.map((event) => (
-								<div key={event.id} className="tripEventCard">
-									<Link to={`/trip/${id}/events`}>
-									<p>{event.title}</p>
-									</Link>
-									<p>{event.location}</p>
-									<p>{event.status}</p>
-								</div>
-							))}
-						</div>
-					) : (
-						<>
-							<p>This trip has no agenda</p>
-						</>
-					)
-}
+					<Events/>
 				</>
 			) : (
 				<>
