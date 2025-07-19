@@ -67,42 +67,10 @@ export default function TripDetails({ token }) {
 						<h1 className="tripTitle">{trip.title}</h1>
 					</div>
 
-					{!tripMembers.length <= 1 ? (
-						<div className="TripMemberGrid">
-                            <h3>Trip Members</h3>
-							{tripMembers.map((member) => (
-								<div key={member.id} className="tripMemberCard">
-									<p>{member.user_email}</p>
-								</div>
-							))}
-						</div>
-					) : (
-						<>
-							<p>You are the </p>
-							<button>Add a travel companion</button>
-						</>
-					)}
+					<h2>Trip Members</h2>
+					<TripMembers token={token} />
 
-					{events ? (
-						<div className="EventsGrid">
-							<Link to={`/trip/${id}/events`}>
-                            <h3>Events</h3>
-							</Link>
-							{events.map((event) => (
-								<div key={event.id} className="tripEventCard">
-									<Link to={`/trip/${id}/events`}>
-									<p>{event.title}</p>
-									</Link>
-								</div>
-							))}
-						</div>
-					) : (
-						<>
-                            <h3>Events</h3>
-							<p>This trip has no agenda</p>
-							<button>Plan an event</button>
-						</>
-					)}
+					<Events/>
 				</>
 			) : (
 				<>

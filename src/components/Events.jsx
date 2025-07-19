@@ -6,6 +6,7 @@ export default function Events(passedData){
     const { tripId } = useParams();
     const [eventsList, setEventsList] = useState(null) //this varible holds a list of all the events
     
+    const [showForm, setShowForm] = useState(false)
     const [title, setTitle] = useState(null)
     const [location, setLocation] = useState(null)
     const [status, setStatus] = useState(null)
@@ -61,29 +62,33 @@ export default function Events(passedData){
     
     return(
     <>
-        <h1>Events</h1>
-        <Link to={`../trip/trip/${tripId}`}>
-        <button>Go Back</button>
-        </Link>
-        {eventsList && <div>{eventsList}</div>}
-        
-        <h3>Create New Event</h3>
-        {message && <div>{message}</div>}
-        <form onSubmit={handleSubmit}>
-            <label id="formContent">
-                Event Title: <input value={title} onChange={(e) => setTitle(e.target.value)}/>
-            </label>
-            <br></br>
-            <label id="formContent">
-                Event Location: <input value={location} onChange={(e) => setLocation(e.target.value)}/>
-            </label>
-            <br></br>
-            <label id="formContent">
-                Event Status: <input value={status} onChange={(e) => setStatus(e.target.value)}/>
-            </label>
-            <br></br>
-            <button id="formContent">Submit</button>
-        </form>
+        <h2>What's on the agenda?</h2>
+        {showForm ? 
+            <div id="formBox">
+                {message && <div>{message}</div>}
+                <form onSubmit={handleSubmit}>
+                    <label id="formContent">
+                        Event Title: <input value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    </label>
+                    <br></br>
+                    <label id="formContent">
+                        Event Location: <input value={location} onChange={(e) => setLocation(e.target.value)}/>
+                    </label>
+                    <br></br>
+                    <label id="formContent">
+                        Event Status: <input value={status} onChange={(e) => setStatus(e.target.value)}/>
+                    </label>
+                    <br></br>
+                    <button id="formContent">Submit</button>
+                </form> 
+            </div>
+            : 
+            eventsList ? 
+                <div>{eventsList}</div> 
+                : 
+                <p>This trip has no agenda</p>
+        }
+
     </>
     )
 }
