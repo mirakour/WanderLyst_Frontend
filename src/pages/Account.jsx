@@ -40,14 +40,7 @@ export default function Account( {token, setUserId } ){
             Please Login to See Your Account Information
             </Link>
             </>
-            :
-            <>
-            <Link to="/users/login" replace>
-            Please Login to See Your Account Information
-            </Link>
-            </>
         }
-        </div>
         </div>
     )
 }

@@ -1,17 +1,9 @@
 import {useEffect, useState} from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import TripForm from "../components/TripForm";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import TripForm from "../components/TripForm";
-
 
 export default function MyTrips( {token} ){
     const [trips, setTrips] = useState([])
-    const navigate = useNavigate()
-    
-
-
-    const navigate = useNavigate()
     
 
 
@@ -42,18 +34,10 @@ export default function MyTrips( {token} ){
         <Link to="/users/login" replace>
             <h2>Please Login To See Your Trips</h2>
         </Link>
-
-
-        <Link to="/users/login" replace>
-            <h2>Please Login To See Your Trips</h2>
-        </Link>
-
-
         </>
-        )
+    )
     }else return(
         <>
-            {trips.length > 0 && token ?        
             {trips.length > 0 && token ?        
             <div className="MyTripsGrid">
             <h2>My Trips</h2>
