@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function Events(passedData){
+    const [message, setMessage] = useState(null)
     const { tripId } = useParams();
     const [eventsList, setEventsList] = useState(null) //this varible holds a list of all the events
     
@@ -39,11 +40,11 @@ export default function Events(passedData){
         event.preventDefault();
 
         try{
-            const response = await fetch(`URL-goes-here/api/trips/${passedData.tripIdPlaceHolder}/events`,{
+            const response = await fetch(`http://localhost:3000/api/trip/${tripId}/events`,{
                 method: "POST", 
                 headers: { 
                     "Content-Type": "application/json",
-                    "Authorization":  `Bearer ${passedData.tokenPlaceHolder}`
+                    "Authorization":  `Bearer ${passedData.token}`
                 }, 
                 body: JSON.stringify({ 
                     title: title, 
@@ -51,6 +52,8 @@ export default function Events(passedData){
                     status: status
                 })
             })
+            const rawData = await response.json() 
+            setMessage(rawData.message)
         }catch (error){
             console.error(error)
         }
@@ -58,13 +61,14 @@ export default function Events(passedData){
     
     return(
     <>
-        <h2>Events</h2>
+        <h1>Events</h1>
         <Link to={`../trip/trip/${tripId}`}>
         <button>Go Back</button>
         </Link>
         {eventsList && <div>{eventsList}</div>}
         
         <h3>Create New Event</h3>
+        {message && <div>{message}</div>}
         <form onSubmit={handleSubmit}>
             <label id="formContent">
                 Event Title: <input value={title} onChange={(e) => setTitle(e.target.value)}/>
