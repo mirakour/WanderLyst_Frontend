@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login({ token, setToken, userId, setUserId}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navagate = useNavigate();
+    const navigate = useNavigate();
 
 
     async function handleSubmit (event){
@@ -20,7 +20,7 @@ export default function Login({ token, setToken, userId, setUserId}){
         });
         const result = await response.json();
         setToken(result.accessToken);
-        navagate("/");        
+        navigate("/users/me");        
     }catch(error){
         console.log(error)
     };

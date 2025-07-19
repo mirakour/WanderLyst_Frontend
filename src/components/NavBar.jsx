@@ -17,14 +17,14 @@ export default function NavBar({ token, setToken, setUserId, userId }) {
 
       <div className="navbar-center">
         <img src={logo} alt="logo" />
-        <h1>WanderLyst</h1>
+        <h1 className="navbar-title">WanderLyst</h1>
       </div>
 
       <div className="navbar-right">
         {token ? (
           <>
             <Link to="/trip/new" className="navLink">Trip Planner</Link>
-            <Link to={`/users/${userId}`} className="navLink">My Account</Link>
+            <Link to="/users/me" className="navLink">My Account</Link>
             <button onClick={logout} className="navLink">Logout</button>
           </>
         ) : (

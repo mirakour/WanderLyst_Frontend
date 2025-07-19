@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-
+import MyTrips from "./MyTrips";
 
 export default function Account( {token, setUserId } ){
     const [user, setUser] = useState({})
@@ -25,15 +25,25 @@ export default function Account( {token, setUserId } ){
     }, []);
 
     return(
-        <>
-        <h1>Account Information</h1>
-        {user ?         
-            <div className="userDetails">
+        <div>
+        {token  ?        
+            <div className="account"> 
+                <h1>Account Information</h1>
+                <div className="userDetails">
                 <h3 className="Username">{user.name}</h3>
+                </div>
+            <h2>Upcoming Trips</h2>
+            
+            <h2>Past Trips</h2>
+        <MyTrips token={token}/>
             </div>
-        :
-            <></>
+            :
+            <>
+            <Link to="/users/login" replace>
+            Please Login to See Your Account Information
+            </Link>
+            </>
         }
-        </>
+        </div>
     )
 }

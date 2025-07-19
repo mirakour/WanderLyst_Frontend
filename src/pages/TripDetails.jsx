@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import TripMembers from "../components/TripMembers";
+import Events from "../components/Events";
 
 export default function TripDetails({ token }) {
 	const { id } = useParams();
 	const [trip, setTrip] = useState({});
-	const [events, setEvents] = useState(null);
+	const [events, setEvents] = useState([]);
 	const [tripMembers, setTripMembers] = useState([]);
 
 	useEffect(() => {
@@ -23,21 +25,21 @@ export default function TripDetails({ token }) {
 				console.error(err);
 			}
 		};
-		//Define Trip Members
-		const fetchTripMembers = async () => {
-			try {
-				const res = await fetch(
-					`http://localhost:3000/api/trip/${id}/members`,
-					{
-						headers: { Authorization: `Bearer ${token}` },
-					}
-				);
-				const data = await res.json();
-				setTripMembers(data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
+		// //Define Trip Members
+		// const fetchTripMembers = async () => {
+		// 	try {
+		// 		const res = await fetch(
+		// 			`http://localhost:3000/api/trip/${id}/members`,
+		// 			{
+		// 				headers: { Authorization: `Bearer ${token}` },
+		// 			}
+		// 		);
+		// 		const data = await res.json();
+		// 		setTripMembers(data);
+		// 	} catch (err) {
+		// 		console.error(err);
+		// 	}
+		// };
 		//Define Events
 		const fetchEvents = async () => {
 			try {
@@ -55,7 +57,7 @@ export default function TripDetails({ token }) {
 		};
 
 		fetchTrips();
-		fetchTripMembers();
+		// fetchTripMembers();
 		fetchEvents();
 	}, []);
 
@@ -65,6 +67,10 @@ export default function TripDetails({ token }) {
 				<>
 					<div className="tripDetails">
 						<h1 className="tripTitle">{trip.title}</h1>
+						<p className="tripDescription">Overview: {trip.description}</p>
+						<p className="tripLocation">{trip.location}</p>
+						<p className="tripDate">{trip.start_date}</p>	
+						<p className="tripDate">{trip.end_date}</p>
 					</div>
 
 					<h2>Trip Members</h2>

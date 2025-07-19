@@ -24,7 +24,7 @@ export default function Events(passedData){
             setEventsList(rawData.map((item) => {
                 return <div id="EventListing" key={item.id}>
                     <h3>{item.title}</h3>
-                    <p>Location: {item.location}</p>
+                    <p>{item.location}</p>
                     <p>Status: {item.status}</p>
                 </div>
             }))
