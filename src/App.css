@@ -165,14 +165,13 @@
   background-color: #333;
 }
 
-.account{
-  margin-top: 169px;
+.account {
   width: 80vw;
 }
 
 .tripCard{
-  border: solid 1px #ccc;
-  border-radius: 10px;
+  border: 1px solid black;
+  border-radius: 25px;
   margin-bottom: 10px;
 }
 
@@ -192,8 +191,94 @@
   margin-bottom: 10px;
 }
 
-.tripCard:hover {
-  color: #ffffff;
-  border: 1px solid #646cff;
+.inspiration-box {
   background-color: #2e2e2e;
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 8000px;
+}
+
+.inspiration-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.inspiration-box h3 {
+  margin: 0.5rem 0 0.2rem 0;
+}
+
+.inspiration-box p {
+  margin: 0.6rem 0;
+}
+
+.cta {
+  margin-top: 2rem;
+}
+
+.join-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.join-button:hover {
+  background-color: #333;
+}
+
+.account {
+  width: 80vw;
+}
+
+.tripCard{
+  border: 1px solid black;
+  border-radius: 25px;
+  margin-bottom: 10px;
+}
+
+.inspiration-box {
+  background-color: #2e2e2e;
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 8000px;
+}
+
+.inspiration-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.inspiration-box h3 {
+  margin: 0.5rem 0 0.2rem 0;
+}
+
+.inspiration-box p {
+  margin: 0.6rem 0;
+}
+
+.cta {
+  margin-top: 2rem;
+}
+
+.join-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.join-button:hover {
+  background-color: #333;
 }
