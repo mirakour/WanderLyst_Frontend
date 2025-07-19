@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import TripForm from "../components/TripForm";
 
 export default function Planner({ token , userId }) {
 	const [title, setTitle] = useState();
@@ -34,63 +35,7 @@ export default function Planner({ token , userId }) {
 	return (
 		<>
 			<h1>Plan Your Trip</h1>
-
-			<div className="orderForm">
-				<form onSubmit={handleSubmit}>
-					<label for="title" className="formLabel">
-						{" "}
-						Title:
-					</label>
-					<input
-						type="text"
-						id="title"
-						name="title"
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-					/>
-
-					<br />
-
-					<label for="startDate" className="formLabel">Start Date: </label>
-
-					<input
-                        type="date"
-                        id="startDate"
-						name="Start Date"
-						value={startDate}
-						onChange={(e) => setStartDate(e.target.value)}
-					/>
-					<br />
-
-					<label for="endDate" className="formLabel">End Date: </label>
-
-					<input
-                        type="date"
-                        id="endDate"
-						name="End Date"
-						value={endDate}
-						onChange={(e) => setEndDate(e.target.value)}
-					/>
-
-					<br />
-
-					<label for="description" className="formLabel">
-						{" "}
-						Description:
-					</label>
-					<textarea
-						id="description"
-						value={description}
-						rows="4"
-						cols="25"
-						onChange={(e) => setDescription(e.target.value)}
-					/>
-
-					<br />
-
-					<button>Submit</button>
-				</form>
-			</div>
+			<TripForm token={token}/>
 		</>
 	);
 }
