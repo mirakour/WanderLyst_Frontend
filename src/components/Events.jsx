@@ -23,7 +23,7 @@ export default function Events(passedData){
             setEventsList(rawData.map((item) => {
                 return <div id="EventListing" key={item.id}>
                     <h3>{item.title}</h3>
-                    <p>Location: {item.location}</p>
+                    <p>{item.location}</p>
                     <p>Status: {item.status}</p>
                 </div>
             }))
@@ -62,7 +62,7 @@ export default function Events(passedData){
     return(
     <>
         <h1>Events</h1>
-        <Link to={`../trip/trip/${tripId}`}>
+        <Link to={`../trip/${tripId}`}>
         <button>Go Back</button>
         </Link>
         {eventsList && <div>{eventsList}</div>}
