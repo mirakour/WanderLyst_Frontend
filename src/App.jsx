@@ -6,6 +6,7 @@ import Inspiration from "./pages/Inspiration"
 import Login from "./pages/Login"
 import Planner from "./pages/Planner"
 import PublicFeed from "./pages/PublicFeed"
+import PublicTripDetails from './pages/PublicTripDetails.jsx'; 
 import Register from "./pages/Register"
 import TaskPage from "./pages/TaskPage"
 import MyTrips from "./pages/MyTrips"
@@ -58,10 +59,11 @@ function App() {
     
       <Routes>
         <Route path="/trip/public" element={<PublicFeed/>} />
+        <Route path="/trip/public/:id" element={<PublicTripDetails token={token}/>} />
         <Route path="/inspiration" element={<Inspiration/>} />
         <Route path="/trip/new" element={<Planner token={token}/>} />
         <Route path="/trip/user/:id" element={<MyTrips token={token}/>} />
-        <Route path="/trip/trip/:id" element={<TripDetails token={token}/>} />
+        <Route path="/trip/:id" element={<TripDetails token={token}/>} />
         <Route path="/tasks/:id" element={<TaskPage/>} />
         <Route path="/users/me" element={<Account token={token}/>}/>
         <Route path="/users/login" element={<Login token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>} />

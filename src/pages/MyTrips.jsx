@@ -47,7 +47,7 @@ export default function MyTrips( {token} ){
 
                             
             <div key={trip.id} className="tripCard">
-            <Link to={`/trip/trip/${trip.id}`}>
+            <Link to={`/trip/${trip.id}`}>
 
                 <h3 className="tripTitle">{trip.title}</h3>
             </Link>    
