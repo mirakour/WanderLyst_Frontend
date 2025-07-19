@@ -38,7 +38,7 @@ export default function TripForm ({ token }) {
             <div className="tripForm">
                 <form onSubmit={handleSubmit}>
 
-                    <label for="title" className="formLabel">
+                    <label htmlFor="title" className="formLabel">
                         Title:
                     </label>
                     <input
@@ -50,7 +50,7 @@ export default function TripForm ({ token }) {
                     />
                     <br />
 
-                    <label for="startDate" className="formLabel">Start Date: </label>
+                    <label htmlFor="startDate" className="formLabel">Start Date: </label>
 
                     <input
                         type="date"
@@ -61,7 +61,7 @@ export default function TripForm ({ token }) {
                     />
                     <br />
 
-                    <label for="endDate" className="formLabel">End Date: </label>
+                    <label htmlFor="endDate" className="formLabel">End Date: </label>
 
                     <input
                         type="date"
@@ -72,7 +72,7 @@ export default function TripForm ({ token }) {
                     />
                     <br />
 
-                    <label for="description" className="formLabel">
+                    <label htmlFor="description" className="formLabel">
                         Description:
                     </label>
                     <textarea

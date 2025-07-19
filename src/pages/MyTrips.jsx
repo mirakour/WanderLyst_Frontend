@@ -47,9 +47,14 @@ export default function MyTrips( {token} ){
 
                             
             <div key={trip.id} className="tripCard">
-            <Link to={`/trip/${trip.id}`}>
-
                 <h3 className="tripTitle">{trip.title}</h3>
+                <p className="tripDates">
+                    {trip.start_date ? new Date(trip.start_date).toLocaleDateString() : "N/A"}  
+                    -
+                    {trip.end_date ? new Date(trip.end_date).toLocaleDateString() : "N/A"}
+                </p>
+            <Link to={`/trip/${trip.id}`}>
+                <p>See Trip Details</p>
             </Link>    
             </div>
             ))}  

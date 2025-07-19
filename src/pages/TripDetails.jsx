@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import TripMembers from "../components/TripMembers";
+import Events from "../components/Events";
 
 export default function TripDetails({ token }) {
 	const { id } = useParams();
 	const [trip, setTrip] = useState({});
-	const [events, setEvents] = useState(null);
+	const [events, setEvents] = useState([]);
 	const [tripMembers, setTripMembers] = useState([]);
 
 	useEffect(() => {
@@ -23,21 +25,21 @@ export default function TripDetails({ token }) {
 				console.error(err);
 			}
 		};
-		//Define Trip Members
-		const fetchTripMembers = async () => {
-			try {
-				const res = await fetch(
-					`http://localhost:3000/api/trip/${id}/members`,
-					{
-						headers: { Authorization: `Bearer ${token}` },
-					}
-				);
-				const data = await res.json();
-				setTripMembers(data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
+		// //Define Trip Members
+		// const fetchTripMembers = async () => {
+		// 	try {
+		// 		const res = await fetch(
+		// 			`http://localhost:3000/api/trip/${id}/members`,
+		// 			{
+		// 				headers: { Authorization: `Bearer ${token}` },
+		// 			}
+		// 		);
+		// 		const data = await res.json();
+		// 		setTripMembers(data);
+		// 	} catch (err) {
+		// 		console.error(err);
+		// 	}
+		// };
 		//Define Events
 		const fetchEvents = async () => {
 			try {
@@ -55,7 +57,7 @@ export default function TripDetails({ token }) {
 		};
 
 		fetchTrips();
-		fetchTripMembers();
+		// fetchTripMembers();
 		fetchEvents();
 	}, []);
 
@@ -65,26 +67,17 @@ export default function TripDetails({ token }) {
 				<>
 					<div className="tripDetails">
 						<h1 className="tripTitle">{trip.title}</h1>
-
+						<p className="tripDescription">Overview: {trip.description}</p>
+						<p className="tripLocation">{trip.location}</p>
+						<p className="tripDate">{trip.start_date}</p>	
+						<p className="tripDate">{trip.end_date}</p>
 					</div>
 
-					{!tripMembers.length === 0 ? (
-						<div className="TripMemberGrid">
-                            <h3>Trip Members</h3>
-							{tripMembers.map((member) => (
-								<div key={member.id} className="tripMemberCard">
-									<p>{member.user_email}</p>
-								</div>
-							))}
-						</div>
-					) : (
-						<>
-							<p>You are the only one here</p>
-							<button>Add a travel companion</button>
-						</>
-					)}
+					<h2>Trip Members</h2>
+					<TripMembers token={token} />
 
-					{events ? (
+					<h2>What's on the agenda?</h2>
+					{!events.length === 0  ? (
 						<div className="EventsGrid">
 							<Link to={`/trip/${id}/events`}>
                             <h3>Events</h3>
@@ -94,16 +87,17 @@ export default function TripDetails({ token }) {
 									<Link to={`/trip/${id}/events`}>
 									<p>{event.title}</p>
 									</Link>
+									<p>{event.location}</p>
+									<p>{event.status}</p>
 								</div>
 							))}
 						</div>
 					) : (
 						<>
-                            <h3>Events</h3>
 							<p>This trip has no agenda</p>
-							<button>Plan an event</button>
 						</>
-					)}
+					)
+}
 				</>
 			) : (
 				<>
