@@ -73,9 +73,10 @@ export default function TripDetails({ token }) {
 				<>
 					<div className="tripDetails">
 						<h1 className="tripTitle">{trip.title}</h1>
+
 					</div>
 
-					{!tripMembers.length <= 1 ? (
+					{!tripMembers.length === 0 ? (
 						<div className="TripMemberGrid">
                             <h3>Trip Members</h3>
 							{tripMembers.map((member) => (
@@ -86,7 +87,7 @@ export default function TripDetails({ token }) {
 						</div>
 					) : (
 						<>
-							<p>You are the </p>
+							<p>You are the only one here</p>
 							<button>Add a travel companion</button>
 						</>
 					)}
