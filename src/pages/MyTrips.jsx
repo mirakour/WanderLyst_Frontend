@@ -4,6 +4,7 @@ import TripForm from "../components/TripForm";
 
 export default function MyTrips( {token} ){
     const [trips, setTrips] = useState([])
+    const [events, setEvents] = useState([]);
     
 
 
@@ -22,6 +23,23 @@ export default function MyTrips( {token} ){
         fetchTrips();
     }, []);
     console.log(trips)
+
+    useEffect(()=>{
+        const fetchEvents = async () => {
+        try {
+            const res = await fetch("http://localhost:3000/api/trip/mytrips",
+            {headers: {Authorization: `Bearer ${token}`}}
+            );
+            const data = await res.json();
+            setEvents(data);
+        } catch (err) {
+            console.error(err)
+        }
+        }
+        fetchEvents();
+    }, []);
+    console.log(trips)
+
 
 
 
