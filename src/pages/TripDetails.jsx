@@ -69,15 +69,14 @@ export default function TripDetails({ token }) {
 						<h1 className="tripTitle">{trip.title}</h1>
 						<p className="tripDescription">Overview: {trip.description}</p>
 						<p className="tripLocation">{trip.location}</p>
-						<p className="tripDate">{trip.start_date}</p>	
-						<p className="tripDate">{trip.end_date}</p>
+						<p className="tripDate">{trip.start_date ? new Date(trip.start_date).toLocaleDateString() : "N/A"}-{trip.end_date ? new Date(trip.end_date).toLocaleDateString() : "N/A"}</p>
 					</div>
 
 					<h2>Trip Members</h2>
 					<TripMembers token={token} />
 
 					<h2>What's on the agenda?</h2>
-					<Events/>
+					<Events token={token}/>
 				</>
 			) : (
 				<>
