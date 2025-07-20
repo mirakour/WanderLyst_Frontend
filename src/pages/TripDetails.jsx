@@ -84,6 +84,7 @@ export default function TripDetails({ token }) {
 					<h2>Trip Members</h2>
 					<TripMembers token={token} />
 
+
 					<Events token={token} tripId={id} />
 					<br />
 					<p>
@@ -110,6 +111,7 @@ export default function TripDetails({ token }) {
 							Delete Trip
 						</button>
 					</span>
+
 				</>
 			) : (
 				<>
