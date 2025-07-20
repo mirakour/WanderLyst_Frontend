@@ -85,7 +85,7 @@ export default function TripDetails({ token }) {
 					<TripMembers token={token} />
 
 
-					<Events token={token} tripId={id} />
+					<Events token={token} tripId={id} canMakeEvent={true}/>
 					<br />
 					<p>
 						Event Privacy Status:
