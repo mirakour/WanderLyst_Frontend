@@ -1,11 +1,10 @@
 import {useEffect, useState} from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TripForm from "../components/TripForm";
-
 
 export default function MyTrips( {token} ){
     const [trips, setTrips] = useState([])
-    const navigate = useNavigate()
+    const [events, setEvents] = useState([]);
     
 
 
@@ -25,6 +24,25 @@ export default function MyTrips( {token} ){
     }, []);
     console.log(trips)
 
+    useEffect(()=>{
+        const fetchEvents = async () => {
+        try {
+            const res = await fetch("http://localhost:3000/api/trip/mytrips",
+            {headers: {Authorization: `Bearer ${token}`}}
+            );
+            const data = await res.json();
+            setEvents(data);
+        } catch (err) {
+            console.error(err)
+        }
+        }
+        fetchEvents();
+    }, []);
+    console.log(trips)
+
+
+
+
 
 
     if (!token) {
@@ -34,10 +52,8 @@ export default function MyTrips( {token} ){
         <Link to="/users/login" replace>
             <h2>Please Login To See Your Trips</h2>
         </Link>
-
-
         </>
-        )
+    )
     }else return(
         <>
             {trips.length > 0 && token ?        
@@ -53,6 +69,7 @@ export default function MyTrips( {token} ){
                     -
                     {trip.end_date ? new Date(trip.end_date).toLocaleDateString() : "N/A"}
                 </p>
+                <p className="eventCounter">Events: {events.length}</p>
             <Link to={`/trip/${trip.id}`}>
                 <p>See Trip Details</p>
             </Link>    
