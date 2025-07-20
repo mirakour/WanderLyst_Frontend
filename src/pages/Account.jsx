@@ -25,14 +25,11 @@ export default function Account( {token, setUserId } ){
     }, []);
 
     return(
-        <div>
+        <div className="account">
         {token  ?        
-            <div className="account"> 
-                <h1>Hey {user.name}, here's the plan</h1>
-                <div className="userDetails">
-                <h3 className="Username">{user.name}</h3>
-                </div>
-                
+            <div className="userDetails"> 
+                <h2>Hey {user.name},<br /> here's the plan</h2>
+
             <MyTrips token={token}/>
             </div>
             :
