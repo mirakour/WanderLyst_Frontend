@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import TripMembers from "../components/TripMembers";
 import Events from "../components/Events";
 
 export default function TripDetails({ token }) {
 	const { id } = useParams();
 	const [trip, setTrip] = useState({});
-	const [events, setEvents] = useState([]);
-	const [tripMembers, setTripMembers] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		//Define Trip
-		const fetchTrips = async () => {
+		const fetchTrip = async () => {
 			try {
 				const res = await fetch(
 					`http://localhost:3000/api/trip/${id}`,
@@ -25,58 +25,90 @@ export default function TripDetails({ token }) {
 				console.error(err);
 			}
 		};
-		// //Define Trip Members
-		// const fetchTripMembers = async () => {
-		// 	try {
-		// 		const res = await fetch(
-		// 			`http://localhost:3000/api/trip/${id}/members`,
-		// 			{
-		// 				headers: { Authorization: `Bearer ${token}` },
-		// 			}
-		// 		);
-		// 		const data = await res.json();
-		// 		setTripMembers(data);
-		// 	} catch (err) {
-		// 		console.error(err);
-		// 	}
-		// };
-		//Define Events
-		const fetchEvents = async () => {
-			try {
-				const res = await fetch(
-					`http://localhost:3000/api/trip/${id}/events`,
-					{
-						headers: { Authorization: `Bearer ${token}` },
-					}
-				);
-				const data = await res.json();
-				setEvents(data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
 
-		fetchTrips();
-		// fetchTripMembers();
-		fetchEvents();
+		fetchTrip();
 	}, []);
 
+	async function deleteTrip() {
+		try {
+			const res = await fetch(`http://localhost:3000/api/trip/${id}`, {
+				method: "DELETE",
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			if (res.ok) {
+				navigate("/mytrips"); // Redirect to MyTrips after deletion
+			}
+		} catch (error) {
+			console.error("Error deleting trip:", error);
+		}
+	}
+
+	async function toggleTripPublic() {
+		setLoading(true);
+		try {
+			const endpoint = trip.public_shared
+				? `http://localhost:3000/api/trip/${id}/private`
+				: `http://localhost:3000/api/trip/${id}/public`;
+			const res = await fetch(endpoint, {
+				method: "PATCH",
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			const data = await res.json();
+			setTrip(data);
+		} catch (err) {
+			console.error(err);
+		} finally {
+			setLoading(false);
+		}
+	}
+
 	return (
-		<>
+		<div className="tripDetailsPage">
 			{trip.title ? (
 				<>
 					<div className="tripDetails">
 						<h1 className="tripTitle">{trip.title}</h1>
-						<p className="tripDescription">Overview: {trip.description}</p>
-						<p className="tripLocation">{trip.location}</p>
-						<p className="tripDate">{trip.start_date}</p>	
-						<p className="tripDate">{trip.end_date}</p>
+						<h2 className="tripDescription">{trip.description}</h2>
+						<p className="tripDate">
+							{trip.start_date
+								? new Date(trip.start_date).toLocaleDateString()
+								: "N/A"}
+							-
+							{trip.end_date
+								? new Date(trip.end_date).toLocaleDateString()
+								: "N/A"}
+						</p>
 					</div>
 
 					<h2>Trip Members</h2>
 					<TripMembers token={token} />
 
-					<Events token={token} tripId={id}/>
+					<Events token={token} tripId={id} />
+					<br />
+					<p>
+						Event Privacy Status:
+						<strong>
+							{trip.public_shared ? "Public" : "Private"}
+						</strong>
+					</p>
+					<button onClick={toggleTripPublic} disabled={loading}>
+						Make {trip.public_shared ? "Private" : "Public"}
+					</button>
+					<br />
+					<span>
+						<button
+							className="goBackButton"
+							onClick={() => navigate(-1)}
+						>
+							Go Back
+						</button>
+						<button
+							className="deleteTripButton"
+							onClick={deleteTrip}
+						>
+							Delete Trip
+						</button>
+					</span>
 				</>
 			) : (
 				<>
@@ -84,6 +116,6 @@ export default function TripDetails({ token }) {
 					<button>Plan a trip</button>
 				</>
 			)}
-		</>
+		</div>
 	);
 }
