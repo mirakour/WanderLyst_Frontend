@@ -49,7 +49,7 @@ export default function TripForm ({ token }) {
                         onChange={(e) => setTitle(e.target.value)}
                     />
                     <br />
-
+                    <span className="dateInputs">
                     <label htmlFor="startDate" className="formLabel">Start Date: </label>
 
                     <input
@@ -71,7 +71,7 @@ export default function TripForm ({ token }) {
                         onChange={(e) => setEndDate(e.target.value)}
                     />
                     <br />
-
+                    </span>
                     <label htmlFor="description" className="formLabel">
                         Description:
                     </label>

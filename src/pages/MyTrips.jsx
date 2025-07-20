@@ -4,47 +4,43 @@ import TripForm from "../components/TripForm";
 
 export default function MyTrips( {token} ){
     const [trips, setTrips] = useState([])
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState({});
     
 
 
     useEffect(()=>{
         const fetchTrips = async () => {
         try {
-            const res = await fetch("http://localhost:3000/api/trip/mytrips",
+            //Define Trips
+            const tripsRes = await fetch("http://localhost:3000/api/trip/mytrips",
             {headers: {Authorization: `Bearer ${token}`}}
             );
-            const data = await res.json();
-            setTrips(data);
+            const tripsData = await tripsRes.json();
+            setTrips(tripsData);
+
+            // Define events for each trip
+            const eventsPromises = tripsData.map(async (trip) => {
+                const eventsRes = await fetch(`http://localhost:3000/api/trip/${trip.id}/events`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const eventsData = await eventsRes.json();
+                return { tripId: trip.id, events: eventsData };
+            });
+
+            const eventsResults = await Promise.all(eventsPromises)
+            const eventsObj = {};
+            eventsResults.forEach(({ tripId, events }) => {
+                eventsObj[tripId] = events;
+            });
+            setEvents(eventsObj);
+
         } catch (err) {
             console.error(err)
         }
         }
         fetchTrips();
     }, []);
-    console.log(trips)
-
-    useEffect(()=>{
-        const fetchEvents = async () => {
-        try {
-            const res = await fetch("http://localhost:3000/api/trip/mytrips",
-            {headers: {Authorization: `Bearer ${token}`}}
-            );
-            const data = await res.json();
-            setEvents(data);
-        } catch (err) {
-            console.error(err)
-        }
-        }
-        fetchEvents();
-    }, []);
-    console.log(trips)
-
-
-
-
-
-
+    
     if (!token) {
         return(
         <>
@@ -69,7 +65,7 @@ export default function MyTrips( {token} ){
                     -
                     {trip.end_date ? new Date(trip.end_date).toLocaleDateString() : "N/A"}
                 </p>
-                <p className="eventCounter">Events: {events.length}</p>
+                <p className="eventCounter">Events: {events[trip.id] ? events[trip.id].length : 0}</p>
             <Link to={`/trip/${trip.id}`}>
                 <p>See Trip Details</p>
             </Link>    
