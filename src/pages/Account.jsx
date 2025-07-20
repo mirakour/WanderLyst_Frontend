@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyTrips from "./MyTrips";
 
 export default function Account( {token, setUserId } ){
     const [user, setUser] = useState({})
+    const navigate = useNavigate();
     
     useEffect(()=>{
         const fetchTrips = async () => {
@@ -34,9 +35,11 @@ export default function Account( {token, setUserId } ){
             </div>
             :
             <>
-            <Link to="/users/login" replace>
-            Please Login to See Your Account Information
-            </Link>
+                <h2>Please Login/Register to view your Trips</h2>
+                <br />
+                <button onClick={() => navigate("/users/login", {replace : true})}>Login</button>
+                <br />
+                <button onClick={() => navigate("/users/register", {replace : true})}>Register</button>
             </>
         }
         </div>
