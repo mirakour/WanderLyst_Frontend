@@ -310,3 +310,25 @@
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+.deleteTripButton {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  border: none;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.deleteTripButton:hover {
+  color: #d70000;
+  border: 1px solid #d70000;
+  background-color: #2e2e2e;
+
+}

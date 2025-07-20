@@ -29,6 +29,23 @@ export default function TripDetails({ token }) {
 		fetchTrip();
 	}, []);
 
+	async function deleteTrip() {
+		try {
+			        const res = await fetch(
+            `http://localhost:3000/api/trip/${id}`,
+            {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+            }
+        );
+        if (res.ok) {
+            navigate("/mytrips"); // Redirect to MyTrips after deletion
+        }
+		} catch (error) {
+			console.error("Error deleting trip:", error);
+			
+		}}
+
     async function toggleTripPublic() {
         setLoading(true);
         try {
@@ -53,6 +70,7 @@ export default function TripDetails({ token }) {
 			{trip.title ? (
 				<>
 					<button className="goBackButton" onClick={() => navigate(-1)}>Go Back</button>
+					<button className="deleteTripButton" onClick={deleteTrip}> Delete Trip</button>
 					<div className="tripDetails">
 						<h1 className="tripTitle">{trip.title}</h1>
 						<h2 className="tripDescription">{trip.description}</h2>
