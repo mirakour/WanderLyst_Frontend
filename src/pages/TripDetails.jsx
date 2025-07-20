@@ -17,6 +17,7 @@ export default function TripDetails({ token }) {
 
 
 	useEffect(() => {
+        console.log("TOKEN at TripDetails:", token);
 		//Define Trip
 		const fetchTrip = async () => {
 			try {
@@ -147,6 +148,7 @@ export default function TripDetails({ token }) {
 							Delete Trip
 						</button>
 					</span>
+
 				</>
 			) : (
 				<>
