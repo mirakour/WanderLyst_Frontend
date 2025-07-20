@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TripForm from "../components/TripForm";
 
 export default function MyTrips( {token} ){
@@ -69,6 +69,7 @@ export default function MyTrips( {token} ){
                     -
                     {trip.end_date ? new Date(trip.end_date).toLocaleDateString() : "N/A"}
                 </p>
+                <p className="eventCounter">Events: {events.length}</p>
             <Link to={`/trip/${trip.id}`}>
                 <p>See Trip Details</p>
             </Link>    
