@@ -10,6 +10,7 @@ export default function TripDetails({ token }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+        console.log("TOKEN at TripDetails:", token);
 		//Define Trip
 		const fetchTrip = async () => {
 			try {
