@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import TripMembers from "../components/TripMembers";
 import Events from "../components/Events";
+import TripForm from "../components/TripForm";
 
 export default function TripDetails({ token }) {
+	const [isEditing, setIsEditing] = useState();
 	const { id } = useParams();
 	const [trip, setTrip] = useState({});
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
+
 
 	useEffect(() => {
 		//Define Trip
@@ -21,6 +28,10 @@ export default function TripDetails({ token }) {
 				);
 				const data = await res.json();
 				setTrip(data);
+				setTitle(data.title);
+				setDescription(data.description);
+				setStartDate(data.start_date);
+				setEndDate(data.end_date);
 			} catch (err) {
 				console.error(err);
 			}
@@ -36,7 +47,7 @@ export default function TripDetails({ token }) {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			if (res.ok) {
-				navigate("/mytrips"); // Redirect to MyTrips after deletion
+				navigate("/users/me", { replace: true });
 			}
 		} catch (error) {
 			console.error("Error deleting trip:", error);
@@ -61,9 +72,23 @@ export default function TripDetails({ token }) {
 			setLoading(false);
 		}
 	}
-
+	if (isEditing) {
+		return (
+			<TripForm
+				token={token}
+				status="edit"
+				trip={trip}
+				setTrip={setTrip}
+				setIsEditing={setIsEditing}
+			/>
+		);
+	}
 	return (
 		<div className="tripDetailsPage">
+			{ isEditing && 
+				<TripForm token={token} status="edit" trip={trip} />
+			}
+
 			{trip.title ? (
 				<>
 					<div className="tripDetails">
@@ -79,12 +104,17 @@ export default function TripDetails({ token }) {
 								: "N/A"}
 						</p>
 					</div>
-
+				
+					<div className="tripMembers">
 					<h2>Trip Members</h2>
 					<TripMembers token={token} />
-
+					</div>
+					
+					<div className="tripEvents">
 					<Events token={token} tripId={id} />
 					<br />
+					</div>
+
 					<p>
 						Event Privacy Status:
 						<strong>
@@ -95,13 +125,21 @@ export default function TripDetails({ token }) {
 						Make {trip.public_shared ? "Private" : "Public"}
 					</button>
 					<br />
-					<span>
+					<span className="tripDetailsButtons">
 						<button
 							className="goBackButton"
 							onClick={() => navigate(-1)}
 						>
 							Go Back
 						</button>
+						
+						<button
+							className="goBackButton"
+							onClick={() => setIsEditing(true)}
+						>
+							Edit Trip
+						</button>
+						
 						<button
 							className="deleteTripButton"
 							onClick={deleteTrip}
@@ -117,5 +155,5 @@ export default function TripDetails({ token }) {
 				</>
 			)}
 		</div>
-	);
+	)
 }
