@@ -8,6 +8,7 @@ export default function Events(passedData){
     const [showForm, setShowForm] = useState(false)
     const [title, setTitle] = useState(null)
     const [location, setLocation] = useState(null)
+    const [date, setDate] = useState(null)
     const [status, setStatus] = useState(null)
    
     async function getEvents() {
@@ -18,12 +19,13 @@ export default function Events(passedData){
                 }
             })
             const rawData = await response.json()
-
+            console.log(rawData)
             //this takes the list of objects and reformats them into various html elements
             setEventsList(rawData.map((item) => {
                 return <div id="EventListing" key={item.id}>
                     <h3>{item.title}</h3>
                     <p>{item.location}</p>
+                    <p>{item.date_time}</p>
                     <p>Status: {item.status}</p>
                 </div>
             }))
@@ -49,6 +51,7 @@ export default function Events(passedData){
                 body: JSON.stringify({ 
                     title: title, 
                     location: location,
+                    date_time: date,
                     status: status
                 })
             })
@@ -86,6 +89,10 @@ export default function Events(passedData){
                     <br></br>
                     <label id="formContent">
                         Event Location: <input value={location} onChange={(e) => setLocation(e.target.value)}/>
+                    </label>
+                    <br></br>
+                    <label id="formContent">
+                        Event Date: <input type="date" value={date} onChange={(e) => setDate(e.target.value)}/>
                     </label>
                     <br></br>
                     <label id="formContent">
