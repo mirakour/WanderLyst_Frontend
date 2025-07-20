@@ -32,6 +32,7 @@ export default function Account( {token, setUserId } ){
                 <div className="userDetails">
                 <h3 className="Username">{user.name}</h3>
                 </div>
+                
             <MyTrips token={token}/>
             </div>
             :
