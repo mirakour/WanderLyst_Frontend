@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function TripForm({ token , status , trip , setTrip , setIsEditing }) {
-	const [title, setTitle] = useState(trip ? trip.title : "");
-	const [description, setDescription] = useState(trip ? trip.description : "");
-	const [startDate, setStartDate] = useState(trip ? trip.start_date : "");
-	const [endDate, setEndDate] = useState(trip ? trip.end_date : "");
+	const [title, setTitle] = useState(trip?.title || "");
+	const [description, setDescription] = useState(trip?.description || "");
+	const [startDate, setStartDate] = useState(trip?.start_date ? trip.start_date.slice(0, 10) : "");
+	const [endDate, setEndDate] = useState(trip?.end_date ? trip.end_date.slice(0, 10) : "");
 	const navigate = useNavigate();
 
 	async function handleSubmit(event) {
@@ -77,11 +77,6 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 		}
 	}
 
-
-
-	if (!token) {
-		return <button>Login to Plan a Trip</button>;
-	} else {
 		return (
 			<>
 				{!token ? (
@@ -156,5 +151,4 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 				)}
 			</>
 		);
-}
 }

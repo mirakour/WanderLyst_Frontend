@@ -356,7 +356,30 @@
   color: #fff;
 }
 
-.goBackButton {
+.tripDetailsButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50px;
+  margin-top: 1rem;
+}
+
+.tripDetailsButton {
+  background-color: #1a1a1a;
+  color: #fff;
+  height: 50px;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+}
+
+#goBackButton {
   background-color: #1a1a1a;
   color: #fff;
   padding: 0.6em 1.2em;
@@ -369,12 +392,12 @@
   margin:  0 1vw 1vw 0;
 }
 
-.deleteTripButton {
+#deleteTripButton {
   background-color: #1a1a1a;
   color: #fff;
   padding: 0.6em 1.2em;
   border-radius: 8px;
-  border: none;
+  border: 1px solid transparent;
   font-size: 1em;
   font-weight: 500;
   cursor: pointer;
@@ -382,11 +405,16 @@
   margin:  0 1vw 1vw 0;
 }
 
-.deleteTripButton:hover {
+#deleteTripButton:hover {
   color: #d70000;
   border: 1px solid #d70000;
   background-color: #2e2e2e;
 
+}
+
+#editTripButton:hover {
+  border: 1px solid #006eff;
+  background-color: #2e2e2e;
 }
 
 .tripDetailsPage {
@@ -456,13 +484,6 @@
   width: 80%;
   max-width: 8000px;
   margin-bottom: 1rem;
-}
-
-.tripDetailsButtons{
-  display: flex;
-  width: 100%;
-  margin-top: 1rem;
-  margin-left: 15vw;
 }
 
 

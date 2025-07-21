@@ -10,10 +10,7 @@ export default function TripDetails({ token }) {
 	const [trip, setTrip] = useState({});
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
+	const [favorite, setFavorite] = useState();
 
 
 	useEffect(() => {
@@ -38,7 +35,27 @@ export default function TripDetails({ token }) {
 			}
 		};
 
+		const fetchFavoritesStatus = async () => {
+			try {
+				const res = await fetch(
+					`http://localhost:3000/api/favorites/${id}`,
+					{
+						headers: { Authorization: `Bearer ${token}` },
+					}
+				);
+				const data = await res.json();
+				if (data.length > 0) {
+					setFavorite(true);
+				} else {
+					setFavorite(false);
+				}
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
 		fetchTrip();
+		fetchFavoritesStatus();
 	}, []);
 
 	async function deleteTrip() {
@@ -52,6 +69,28 @@ export default function TripDetails({ token }) {
 			}
 		} catch (error) {
 			console.error("Error deleting trip:", error);
+		}
+	}
+
+	async function favoriteTrip() {
+		try {
+			const res = await fetch(`http://localhost:3000/api/favorites/${id}`, {
+				method: "POST",
+				headers: { Authorization: `Bearer ${token}` },
+			});
+		} catch (error) {
+			console.error("Error favoriting trip:", error);
+		}
+	}
+
+	async function unfavoriteTrip() {
+		try {
+			const res = await fetch(`http://localhost:3000/api/favorites/${id}`, {
+				method: "DELETE",
+				headers: { Authorization: `Bearer ${token}` },
+			});
+		} catch (error) {
+			console.error("Error unfavoriting trip:", error);
 		}
 	}
 
@@ -130,32 +169,50 @@ export default function TripDetails({ token }) {
 					<br />
 					<span className="tripDetailsButtons">
 						<button
-							className="goBackButton"
+							className="tripDetailsButton"
 							onClick={() => navigate(-1)}
 						>
 							Go Back
 						</button>
 						
 						<button
-							className="goBackButton"
+							className="tripDetailsButton"
+							id="editTripButton"
 							onClick={() => setIsEditing(true)}
 						>
 							Edit Trip
 						</button>
 						
 						<button
-							className="deleteTripButton"
-							onClick={deleteTrip}
+							className="tripDetailsButton"
+							id="deleteTripButton"
+							onClick={() => deleteTrip()}
 						>
 							Delete Trip
 						</button>
+						{favorite ? (
+							<button 
+								className="tripDetailsButton"
+								id="unfavoriteTripButton"
+								onClick={() => { unfavoriteTrip(); setFavorite(false); }}>	
+								Unfavorite
+							</button>
+						) : (
+							<button 
+								className="tripDetailsButton"
+								id="favoriteTripButton"
+								onClick={() => { favoriteTrip(); setFavorite(true); }}>	
+								Favorite
+							</button>
+						)}
+
 					</span>
 
 				</>
 			) : (
 				<>
-					<h1>Are you sure you're in the right place?</h1>
-					<button>Plan a trip</button>
+				<h1>Loading Trip...</h1>
+				<TripForm token={token} status="new" />
 				</>
 			)}
 		</div>
