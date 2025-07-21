@@ -146,7 +146,7 @@ export default function TripDetails({ token }) {
 					</div>
 				
 					<div className="tripMembers">
-					<h2>Trip Members</h2>
+					<h2>Who's Going?</h2>
 					<TripMembers token={token} />
 
 					</div>
@@ -170,6 +170,7 @@ export default function TripDetails({ token }) {
 					<span className="tripDetailsButtons">
 						<button
 							className="tripDetailsButton"
+							id="goBackButton"
 							onClick={() => navigate(-1)}
 						>
 							Go Back
