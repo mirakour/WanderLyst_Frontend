@@ -10,11 +10,10 @@ export default function TripDetails({ token }) {
 	const [trip, setTrip] = useState({});
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
-	const [favorite, setFavorite] = useState();
-
+	const [favorite, setFavorite] = useState(null);
 
 	useEffect(() => {
-        console.log("TOKEN at TripDetails:", token);
+		console.log("TOKEN at TripDetails:", token);
 		//Define Trip
 		const fetchTrip = async () => {
 			try {
@@ -26,10 +25,6 @@ export default function TripDetails({ token }) {
 				);
 				const data = await res.json();
 				setTrip(data);
-				setTitle(data.title);
-				setDescription(data.description);
-				setStartDate(data.start_date);
-				setEndDate(data.end_date);
 			} catch (err) {
 				console.error(err);
 			}
@@ -44,11 +39,14 @@ export default function TripDetails({ token }) {
 					}
 				);
 				const data = await res.json();
-				if (data.length > 0) {
+				if (data.favorite) {
 					setFavorite(true);
 				} else {
 					setFavorite(false);
 				}
+				console.log("favorite result:", res);
+				console.log("Favorite data:", data);
+				console.log(`favorite status = ${favorite}`);
 			} catch (err) {
 				console.error(err);
 			}
@@ -74,10 +72,13 @@ export default function TripDetails({ token }) {
 
 	async function favoriteTrip() {
 		try {
-			const res = await fetch(`http://localhost:3000/api/favorites/${id}`, {
-				method: "POST",
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const res = await fetch(
+				`http://localhost:3000/api/favorites/${id}`,
+				{
+					method: "POST",
+					headers: { Authorization: `Bearer ${token}` },
+				}
+			);
 		} catch (error) {
 			console.error("Error favoriting trip:", error);
 		}
@@ -85,10 +86,13 @@ export default function TripDetails({ token }) {
 
 	async function unfavoriteTrip() {
 		try {
-			const res = await fetch(`http://localhost:3000/api/favorites/${id}`, {
-				method: "DELETE",
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const res = await fetch(
+				`http://localhost:3000/api/favorites/${id}`,
+				{
+					method: "DELETE",
+					headers: { Authorization: `Bearer ${token}` },
+				}
+			);
 		} catch (error) {
 			console.error("Error unfavoriting trip:", error);
 		}
@@ -125,15 +129,12 @@ export default function TripDetails({ token }) {
 	}
 	return (
 		<div className="tripDetailsPage">
-			{ isEditing && 
-				<TripForm token={token} status="edit" trip={trip} />
-			}
+			{isEditing && <TripForm token={token} status="edit" trip={trip} />}
 
 			{trip.title ? (
 				<>
-					<div className="tripDetails">
+					<div className="tripDetailsHeader">
 						<h1 className="tripTitle">{trip.title}</h1>
-						<h2 className="tripDescription">{trip.description}</h2>
 						<p className="tripDate">
 							{trip.start_date
 								? new Date(trip.start_date).toLocaleDateString()
@@ -144,18 +145,48 @@ export default function TripDetails({ token }) {
 								: "N/A"}
 						</p>
 					</div>
-				
+					<h2 className="tripDescription">{trip.description}</h2>
+
 					<div className="tripMembers">
-					<h2>Trip Members</h2>
-					<TripMembers token={token} />
-
+						<h2>Who's Going?</h2>
+						<TripMembers token={token} />
 					</div>
-					
+
 					<div className="tripEvents">
-					<Events token={token} tripId={id} canMakeEvent={true}/>
+						<Events token={token} tripId={id} canMakeEvent={true} />
 
-					<br />
+						<br />
 					</div>
+
+
+					{favorite ? (
+						<>
+						<p>
+						<strong>"Currently Favorited"</strong>
+						</p>
+						<button
+							className="tripDetailsButton"
+							id="unfavoriteTripButton"
+							onClick={() => {
+								unfavoriteTrip();
+								setFavorite(false);
+							}}
+						>
+							Unfavorite
+						</button>
+						</>
+					) : (
+						<button
+							className="tripDetailsButton"
+							id="favoriteTripButton"
+							onClick={() => {
+								favoriteTrip();
+								setFavorite(true);
+							}}
+						>
+							Favorite
+						</button>
+					)}
 
 					<p>
 						Event Privacy Status:
@@ -163,18 +194,24 @@ export default function TripDetails({ token }) {
 							{trip.public_shared ? "Public" : "Private"}
 						</strong>
 					</p>
-					<button onClick={toggleTripPublic} disabled={loading}>
+					<button
+						id="togglePublicButton"
+						onClick={toggleTripPublic}
+						disabled={loading}
+					>
 						Make {trip.public_shared ? "Private" : "Public"}
 					</button>
 					<br />
+
 					<span className="tripDetailsButtons">
 						<button
 							className="tripDetailsButton"
+							id="goBackButton"
 							onClick={() => navigate(-1)}
 						>
 							Go Back
 						</button>
-						
+
 						<button
 							className="tripDetailsButton"
 							id="editTripButton"
@@ -182,7 +219,7 @@ export default function TripDetails({ token }) {
 						>
 							Edit Trip
 						</button>
-						
+
 						<button
 							className="tripDetailsButton"
 							id="deleteTripButton"
@@ -190,31 +227,14 @@ export default function TripDetails({ token }) {
 						>
 							Delete Trip
 						</button>
-						{favorite ? (
-							<button 
-								className="tripDetailsButton"
-								id="unfavoriteTripButton"
-								onClick={() => { unfavoriteTrip(); setFavorite(false); }}>	
-								Unfavorite
-							</button>
-						) : (
-							<button 
-								className="tripDetailsButton"
-								id="favoriteTripButton"
-								onClick={() => { favoriteTrip(); setFavorite(true); }}>	
-								Favorite
-							</button>
-						)}
-
 					</span>
-
 				</>
 			) : (
 				<>
-				<h1>Loading Trip...</h1>
-				<TripForm token={token} status="new" />
+					<h1>Loading Trip...</h1>
+					<TripForm token={token} status="new" />
 				</>
 			)}
 		</div>
-	)
+	);
 }

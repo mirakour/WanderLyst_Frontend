@@ -25,7 +25,7 @@ export default function NavBar({ token, setToken, setUserId, userId }) {
       <div className="navbar-right">
         {token ? (
           <>
-            <Link to="/trip/new" className="navLink">Trip Planner</Link>
+            <Link to="/trip/new" className="navLink">Plan a Trip</Link>
             <Link to="/users/me" className="navLink">My Account</Link>
             <button onClick={logout} className="navLink">Logout</button>
           </>

@@ -42,28 +42,28 @@ export default function EventCreationFrom(passedData){
 
     return(
     <>
-        <div id="formBox">
+        <div class="formContainer">
             <h2>Create Event</h2>
             {message && <div>{message}</div>}
             <form onSubmit={handleSubmit}>
-                <label id="formContent">
+                <label className="formContent" id="formContent">
                     Event Title: <input onChange={(e) => setTitle(e.target.value)}/>
                 </label>
                 <br></br>
-                <label id="formContent">
+                <label className="formContent" id="formContent">
                     Event Location: <input onChange={(e) => setLocation(e.target.value)}/>
                 </label>
                 <br></br>
-                <label id="formContent">
+                <label className="formContent" id="formContent">
                     Event Date: <input type="date" onChange={(e) => setDate(e.target.value)}/>
                 </label>
                 <br></br>
-                <label id="formContent">
+                <label className="formContent" id="formContent">
                     Event Status: <input onChange={(e) => setStatus(e.target.value)}/>
                 </label>
                 <br></br>
-                <button id="formContent">Submit</button>
-                <button onClick={handleBackButton}>Cancel</button> 
+                <button className="formContent" id="submitButton">Submit</button>
+                <button id="cancelButton" onClick={handleBackButton}>Cancel</button> 
             </form>
                 
         </div>
