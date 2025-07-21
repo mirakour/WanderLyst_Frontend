@@ -39,11 +39,13 @@ export default function TripDetails({ token }) {
 					}
 				);
 				const data = await res.json();
-				if (res.ok) {
+				if (data.favorite) {
 					setFavorite(true);
 				} else {
 					setFavorite(false);
 				}
+				console.log("favorite result:", res);
+				console.log("Favorite data:", data);
 				console.log(`favorite status = ${favorite}`);
 			} catch (err) {
 				console.error(err);
