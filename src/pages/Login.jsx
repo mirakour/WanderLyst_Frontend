@@ -22,7 +22,7 @@ export default function Login({ token, setToken, userId, setUserId }) {
       if (response.ok) {
         setToken(result.accessToken);
         setUserId(result.user.id);
-        navigate("/");  // Redirect to Home after login
+        navigate("/users/me", { replace: true });
       } else {
         setErrorMessage(result.error || "Login failed. Check your credentials.");
       }
