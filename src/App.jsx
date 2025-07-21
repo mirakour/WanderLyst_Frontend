@@ -14,7 +14,7 @@ import TripDetails from "./pages/TripDetails"
 import NavBar from './components/NavBar';
 import Events from './components/Events.jsx';
 import ManageMembers from "./pages/ManageMembers.jsx";
-
+import EventDetails from './components/EventDetails.jsx';
 import './App.css'
 
 function App() {
@@ -54,19 +54,20 @@ function App() {
       </div>
 
       <Routes>
-        <Route path="/trip/:tripId/events" element={<Events token={token} />} />
-        <Route path="/trip/public" element={<PublicFeed />} />
-        <Route path="/trip/public/:id" element={<PublicTripDetails token={token} />} />
-        <Route path="/inspiration" element={<Inspiration />} />
-        <Route path="/trip/new" element={<Planner token={token} />} />
-        <Route path="/trip/user/:id" element={<MyTrips token={token} />} />
-        <Route path="/trip/:id" element={<TripDetails token={token} />} />
-        <Route path="/tasks/:id" element={<TaskPage />} />
-        <Route path="/users/me" element={<Account token={token} />} />
-        <Route path="/users/login" element={<Login token={token} setToken={setToken} userId={userId} setUserId={setUserId} />} />
-        <Route path="/users/register" element={<Register token={token} setToken={setToken} userId={userId} setUserId={setUserId} />} />
+        <Route path="/trip/:tripId/events" element={<Events token={token}/>} />
+        <Route path='/trip/events/:id' element={<EventDetails token={token}/>} />
+        <Route path="/trip/public" element={<PublicFeed/>} />
+        <Route path="/trip/public/:id" element={<PublicTripDetails token={token}/>} />
+        <Route path="/inspiration" element={<Inspiration/>} />
+        <Route path="/trip/new" element={<Planner token={token}/>} />
+        <Route path="/trip/user/:id" element={<MyTrips token={token}/>} />
+        <Route path="/trip/:id" element={<TripDetails token={token}/>} />
+        <Route path="/tasks/:id" element={<TaskPage/>} />
+        <Route path="/users/me" element={<Account token={token}/>}/>
+        <Route path="/users/login" element={<Login token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>} />
+        <Route path = "/users/register" element = {<Register token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>}/>
         <Route path="/trip/:id/members/manage" element={<ManageMembers token={token} />} />
-        <Route path="*" element={<Dashboard />} />
+        <Route path="*" element={<Dashboard/>} />
       </Routes>
     </>
   );
