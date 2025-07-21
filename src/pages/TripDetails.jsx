@@ -10,7 +10,7 @@ export default function TripDetails({ token }) {
 	const [trip, setTrip] = useState({});
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
-	const [favorite, setFavorite] = useState();
+	const [favorite, setFavorite] = useState(null);
 
 	useEffect(() => {
 		console.log("TOKEN at TripDetails:", token);
@@ -25,10 +25,6 @@ export default function TripDetails({ token }) {
 				);
 				const data = await res.json();
 				setTrip(data);
-				setTitle(data.title);
-				setDescription(data.description);
-				setStartDate(data.start_date);
-				setEndDate(data.end_date);
 			} catch (err) {
 				console.error(err);
 			}
@@ -43,11 +39,12 @@ export default function TripDetails({ token }) {
 					}
 				);
 				const data = await res.json();
-				if (data.length > 0) {
+				if (res.ok) {
 					setFavorite(true);
 				} else {
 					setFavorite(false);
 				}
+				console.log(`favorite status = ${favorite}`);
 			} catch (err) {
 				console.error(err);
 			}
@@ -159,10 +156,12 @@ export default function TripDetails({ token }) {
 						<br />
 					</div>
 
-					<p>
-						<strong>{favorite ? "Currently Favorited" : ""}</strong>
-					</p>
+
 					{favorite ? (
+						<>
+						<p>
+						<strong>"Currently Favorited"</strong>
+						</p>
 						<button
 							className="tripDetailsButton"
 							id="unfavoriteTripButton"
@@ -173,6 +172,7 @@ export default function TripDetails({ token }) {
 						>
 							Unfavorite
 						</button>
+						</>
 					) : (
 						<button
 							className="tripDetailsButton"
