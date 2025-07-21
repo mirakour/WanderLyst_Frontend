@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MyTrips from "./MyTrips";
 
-export default function Account( {token, setUserId } ){
+export default function Account( { token } ){
     const [user, setUser] = useState({})
     const navigate = useNavigate();
     
@@ -14,10 +14,7 @@ export default function Account( {token, setUserId } ){
                 headers: {Authorization: `Bearer ${token}`}
             })
             const data = await res.json();
-            console.log(`data = ${data}`)
-            console.log(data)
             setUser(data);
-            console.log(`user = ${user}`)
         } catch (err) {
             console.error(err)
         }
@@ -29,7 +26,7 @@ export default function Account( {token, setUserId } ){
         <div className="account">
         {token  ?        
             <div className="userDetails"> 
-                <h2>Hey {user.name},<br /> here's the plan</h2>
+                <h2>Hey {user.name}, here's the plan</h2>
 
             <MyTrips token={token}/>
             </div>

@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "/logo.png";
 
 export default function NavBar({ token, setToken, setUserId, userId }) {
+  const navigate = useNavigate();
   const logout = () => {
     setToken(null);
     setUserId(null);
+    navigate("/", { replace: true });
   };
 
   return (

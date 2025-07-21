@@ -33,9 +33,8 @@ export default function Planner({ token , userId }) {
 	}
 
 	return (
-		<>
-			<h1>Plan Your Trip</h1>
-			<TripForm token={token}/>
-		</>
+		<div className="plannerPage">
+			<TripForm token={token} status="new"/>
+		</div>
 	);
 }

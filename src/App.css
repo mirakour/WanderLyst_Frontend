@@ -245,8 +245,8 @@
 }
 
 .tripCard{
-  border: 1px solid #fff;
-  border-radius: 25px;
+  border: 1px solid #444;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
@@ -397,7 +397,72 @@
   border: 1px solid #444;
   padding: 1rem;
   border-radius: 10px;
-  width: 100%;
+  width: 80vw;
   max-width: 8000px;
 
 }
+
+.tripForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2e2e2e;
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 8000px;
+}
+
+.tripForm > form {
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  border: 1px solid #444;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.formLabel{
+  font-size: 1.2rem;
+  color: #fff;
+  padding: 0.5rem 0;
+  margin: 0.5rem;
+  width: 100%;
+}
+
+.formLabel > #description {
+  margin-top: .5rem;
+}
+
+.plannerPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 80vw;
+  max-width: 8000px;
+}
+
+.tripDetailsPage > .tripMembers, .tripEvents{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #242424;
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 8000px;
+  margin-bottom: 1rem;
+}
+
+.tripDetailsButtons{
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+  margin-left: 15vw;
+}
+
+
