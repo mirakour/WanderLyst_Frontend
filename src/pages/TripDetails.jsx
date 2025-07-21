@@ -12,9 +12,8 @@ export default function TripDetails({ token }) {
 	const navigate = useNavigate();
 	const [favorite, setFavorite] = useState();
 
-
 	useEffect(() => {
-        console.log("TOKEN at TripDetails:", token);
+		console.log("TOKEN at TripDetails:", token);
 		//Define Trip
 		const fetchTrip = async () => {
 			try {
@@ -74,10 +73,13 @@ export default function TripDetails({ token }) {
 
 	async function favoriteTrip() {
 		try {
-			const res = await fetch(`http://localhost:3000/api/favorites/${id}`, {
-				method: "POST",
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const res = await fetch(
+				`http://localhost:3000/api/favorites/${id}`,
+				{
+					method: "POST",
+					headers: { Authorization: `Bearer ${token}` },
+				}
+			);
 		} catch (error) {
 			console.error("Error favoriting trip:", error);
 		}
@@ -85,10 +87,13 @@ export default function TripDetails({ token }) {
 
 	async function unfavoriteTrip() {
 		try {
-			const res = await fetch(`http://localhost:3000/api/favorites/${id}`, {
-				method: "DELETE",
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const res = await fetch(
+				`http://localhost:3000/api/favorites/${id}`,
+				{
+					method: "DELETE",
+					headers: { Authorization: `Bearer ${token}` },
+				}
+			);
 		} catch (error) {
 			console.error("Error unfavoriting trip:", error);
 		}
@@ -125,15 +130,12 @@ export default function TripDetails({ token }) {
 	}
 	return (
 		<div className="tripDetailsPage">
-			{ isEditing && 
-				<TripForm token={token} status="edit" trip={trip} />
-			}
+			{isEditing && <TripForm token={token} status="edit" trip={trip} />}
 
 			{trip.title ? (
 				<>
-					<div className="tripDetails">
+					<div className="tripDetailsHeader">
 						<h1 className="tripTitle">{trip.title}</h1>
-						<h2 className="tripDescription">{trip.description}</h2>
 						<p className="tripDate">
 							{trip.start_date
 								? new Date(trip.start_date).toLocaleDateString()
@@ -144,18 +146,45 @@ export default function TripDetails({ token }) {
 								: "N/A"}
 						</p>
 					</div>
-				
+					<h2 className="tripDescription">{trip.description}</h2>
+
 					<div className="tripMembers">
-					<h2>Who's Going?</h2>
-					<TripMembers token={token} />
-
+						<h2>Who's Going?</h2>
+						<TripMembers token={token} />
 					</div>
-					
+
 					<div className="tripEvents">
-					<Events token={token} tripId={id} canMakeEvent={true}/>
+						<Events token={token} tripId={id} canMakeEvent={true} />
 
-					<br />
+						<br />
 					</div>
+
+					<p>
+						<strong>{favorite ? "Currently Favorited" : ""}</strong>
+					</p>
+					{favorite ? (
+						<button
+							className="tripDetailsButton"
+							id="unfavoriteTripButton"
+							onClick={() => {
+								unfavoriteTrip();
+								setFavorite(false);
+							}}
+						>
+							Unfavorite
+						</button>
+					) : (
+						<button
+							className="tripDetailsButton"
+							id="favoriteTripButton"
+							onClick={() => {
+								favoriteTrip();
+								setFavorite(true);
+							}}
+						>
+							Favorite
+						</button>
+					)}
 
 					<p>
 						Event Privacy Status:
@@ -163,10 +192,15 @@ export default function TripDetails({ token }) {
 							{trip.public_shared ? "Public" : "Private"}
 						</strong>
 					</p>
-					<button onClick={toggleTripPublic} disabled={loading}>
+					<button
+						id="togglePublicButton"
+						onClick={toggleTripPublic}
+						disabled={loading}
+					>
 						Make {trip.public_shared ? "Private" : "Public"}
 					</button>
 					<br />
+
 					<span className="tripDetailsButtons">
 						<button
 							className="tripDetailsButton"
@@ -175,7 +209,7 @@ export default function TripDetails({ token }) {
 						>
 							Go Back
 						</button>
-						
+
 						<button
 							className="tripDetailsButton"
 							id="editTripButton"
@@ -183,7 +217,7 @@ export default function TripDetails({ token }) {
 						>
 							Edit Trip
 						</button>
-						
+
 						<button
 							className="tripDetailsButton"
 							id="deleteTripButton"
@@ -191,31 +225,14 @@ export default function TripDetails({ token }) {
 						>
 							Delete Trip
 						</button>
-						{favorite ? (
-							<button 
-								className="tripDetailsButton"
-								id="unfavoriteTripButton"
-								onClick={() => { unfavoriteTrip(); setFavorite(false); }}>	
-								Unfavorite
-							</button>
-						) : (
-							<button 
-								className="tripDetailsButton"
-								id="favoriteTripButton"
-								onClick={() => { favoriteTrip(); setFavorite(true); }}>	
-								Favorite
-							</button>
-						)}
-
 					</span>
-
 				</>
 			) : (
 				<>
-				<h1>Loading Trip...</h1>
-				<TripForm token={token} status="new" />
+					<h1>Loading Trip...</h1>
+					<TripForm token={token} status="new" />
 				</>
 			)}
 		</div>
-	)
+	);
 }
