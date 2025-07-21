@@ -109,10 +109,12 @@ export default function TripDetails({ token }) {
 					<div className="tripMembers">
 					<h2>Trip Members</h2>
 					<TripMembers token={token} />
+
 					</div>
 					
 					<div className="tripEvents">
-					<Events token={token} tripId={id} />
+					<Events token={token} tripId={id} canMakeEvent={true}/>
+
 					<br />
 					</div>
 

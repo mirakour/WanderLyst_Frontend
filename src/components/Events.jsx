@@ -15,11 +15,13 @@ export default function Events(passedData){
                 }
             })
             const rawData = await response.json()
-            console.log(rawData)
+            
             //this takes the list of objects and reformats them into various html elements
             setEventsList(rawData.map((item) => {
                 return <div id="EventListing" key={item.id}>
-                    <h3>{item.title}</h3>
+                    <Link to={`/trip/events/${item.id}`}>
+                        <h3>{item.title}</h3>
+                    </Link>
                     <p>{item.location}</p>
                     <p>{item.date_time}</p>
                     <p>Status: {item.status}</p>
