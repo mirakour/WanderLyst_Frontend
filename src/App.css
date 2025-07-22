@@ -665,7 +665,9 @@
   margin: 0;
 }
 
-
+.plan-trip-container {
+  margin-top: 25px;
+}
 
 /* Input fields */
 .plan-trip-container input,
