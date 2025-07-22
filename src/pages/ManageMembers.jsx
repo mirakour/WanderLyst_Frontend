@@ -8,7 +8,7 @@ export default function ManageMembers({ token }) {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    console.log("TOKEN IN ManageMembers:", token);
+    //console.log("TOKEN IN ManageMembers:", token);
     fetchMembers();
   }, [id, token]);
 

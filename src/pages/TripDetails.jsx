@@ -13,7 +13,7 @@ export default function TripDetails({ token }) {
 	const [favorite, setFavorite] = useState(null);
 
 	useEffect(() => {
-		console.log("TOKEN at TripDetails:", token);
+		//console.log("TOKEN at TripDetails:", token);
 		//Define Trip
 		const fetchTrip = async () => {
 			try {
@@ -44,9 +44,9 @@ export default function TripDetails({ token }) {
 				} else {
 					setFavorite(false);
 				}
-				console.log("favorite result:", res);
-				console.log("Favorite data:", data);
-				console.log(`favorite status = ${favorite}`);
+				//console.log("favorite result:", res);
+				//console.log("Favorite data:", data);
+				//console.log(`favorite status = ${favorite}`);
 			} catch (err) {
 				console.error(err);
 			}
