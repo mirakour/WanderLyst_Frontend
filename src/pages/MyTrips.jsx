@@ -136,7 +136,7 @@ export default function MyTrips({ token }) {
 		);
 	} else return (
 			<>
-				{trips.length > 0 && token ? (
+				{sortedAndFilteredTrips.length > 0 && token ? (
 					<div className="MyTripsGrid">
 						<div className="MyTripsHeader">
 							<h2>My Trips</h2>
@@ -217,10 +217,14 @@ export default function MyTrips({ token }) {
 				) : (
 					<>
 						<h3>
-							Looks like you don't have any trips this fit this
-							criteria
+                            {trips.length > 0
+                                ?
+                                "Looks like you don't have any trips this fit this criteria"
+                                :
+                                "You don't have any trips yet!"
+                            }
+							
 						</h3>
-						<h4>Plan a trip</h4>
 						<TripForm token={token} />
 					</>
 				)}

@@ -145,7 +145,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 							</label>
 							<br />
 
-							<button>{status === "edit" ? "Update Trip" : "Submit New Trip" }</button>
+							<button id="submitButton">{status === "edit" ? "Update Trip" : "Submit New Trip" }</button>
 						</form>
 					</div>
 				)}
