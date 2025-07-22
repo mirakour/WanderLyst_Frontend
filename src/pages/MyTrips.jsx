@@ -103,7 +103,8 @@ export default function MyTrips({ token }) {
                         <label 
                     htmlFor="tripView"
                     className="tripFilter">
-                        Filter Trips:
+                        Filter Trips: 
+                        <br></br>
 					<select
 						id="tripView"
 						value={view}

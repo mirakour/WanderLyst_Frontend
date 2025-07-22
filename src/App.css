@@ -46,7 +46,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 98%;
+  width: 99%;
   height: 100px;
   background-color: #1a1a1a;
   display: flex;
@@ -356,6 +356,7 @@
   color: #fff;
 }
 
+
 .tripDetailsButtons{
   display: flex;
   flex-direction: row;
@@ -467,10 +468,11 @@
   border: 1px solid #444;
   padding: 1rem;
   border-radius: 10px;
-  width: 80vw;
+  width: 50vw;
   max-width: 8000px;
 
 }
+
 
 .formContainer{
   display: flex;
@@ -581,12 +583,23 @@
   padding: 1rem 0;
 }
 
-.tripFilter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
+/* Style for Filter Trips section on MyTrips page */
+.tripFilter label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.tripFilter select {
+  font-size: 1.1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #555;
+  width: 140px;
+  cursor: pointer;
 }
 
 .MyTripsHeader{
@@ -603,20 +616,86 @@
   padding: 1rem 0;
 }
 
-.tripDetailsHeader{
+.tripDetailsHeader {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
   background-color: #242424;
   border: 1px solid #444;
-  padding: 1rem;
   border-radius: 10px;
-  width: 80%;
-  max-width: 8000px;
+  padding: 1.5rem;
+  margin: 2rem auto 1rem auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.tripDetailsHeader .tripTitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 2rem auto 1rem auto;
+  text-align: center;
+}
+
+.tripDetailsHeader .tripDate {
+  font-size: 1rem;
+  color: #ccc;
+  text-align: center;
+  margin: 0;
+}
+
+/* Planner Form */
+.plan-trip-container {
+  max-width: 400px;
+  margin: 0px auto 0 auto; 
+  background-color: #2e2e2e;
+  padding: 6rem;
+  border-radius: 10px;
+  border: 1px solid #555;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Form header */
+.plan-trip-header {
+  text-align: center;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
-  height: 80px;
-  position: sticky;
-  top: 100px;
-  z-index: 1;
+  font-weight: bold;
+}
+
+/* Input fields */
+.plan-trip-container input,
+.plan-trip-container textarea {
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+/* Labels aligned consistently */
+.plan-trip-container label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* Submit button styling (not stretched full width) */
+.plan-trip-submit {
+  display: block;
+  margin: 1rem auto 0 auto;
+  padding: 0.75rem 2rem;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.plan-trip-submit:hover {
+  background-color: #333;
 }
