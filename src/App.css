@@ -602,6 +602,24 @@
   cursor: pointer;
 }
 
+/* Style for Sort Trips section on MyTrips page */
+.tripSort label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.tripSort select {
+  font-size: 1.1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
 .MyTripsHeader{
   display: flex;
   flex-direction: row;

@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 import TripForm from "../components/TripForm";
 
 export default function MyTrips({ token }) {
-    const [filter, setfilter] = useState("all");
+	const [filter, setfilter] = useState("all");
 	const [trips, setTrips] = useState([]);
 	const [events, setEvents] = useState({});
 	const [favoriteTripIds, setFavoriteTripIds] = useState([]);
+    const [sortBy, setSortBy] = useState("created_date");
+    const [sortOrder, setSortOrder] = useState("desc");
+
+    const filteredTrips = filterTrips(trips, filter);
+    const sortedAndFilteredTrips = sortTrips(filteredTrips, sortBy, sortOrder);
+
 
 	useEffect(() => {
 		const fetchTrips = async () => {
@@ -48,11 +54,10 @@ export default function MyTrips({ token }) {
 				const favData = await favRes.json();
 				console.log("Favorite Data:", favData);
 				setFavoriteTripIds(
-                Array.isArray(favData.favorites) ?
-                    favData.favorites.map(fav => fav.trip_id)
-                    :
-                    []
-                );
+					Array.isArray(favData.favorites)
+						? favData.favorites.map((fav) => fav.trip_id)
+						: []
+				);
 			} catch (err) {
 				console.error(err);
 			}
@@ -84,6 +89,42 @@ export default function MyTrips({ token }) {
 		}
 	}
 
+	// sort Trips
+	function sortTrips(trips, sortBy, sortOrder) {
+		return [...trips].sort((a, b) => {
+			let aValue, bValue;
+
+			switch (sortBy) {
+				case "title":
+					aValue = a.title?.toLowerCase() || "";
+					bValue = b.title?.toLowerCase() || "";
+					break;
+				case "start_date":
+					aValue = new Date(a.start_date || 0);
+					bValue = new Date(b.start_date || 0);
+					break;
+				case "end_date":
+					aValue = new Date(a.end_date || 0);
+					bValue = new Date(b.end_date || 0);
+					break;
+                case "created_date":
+                    aValue = new Date(a.created_at || 0);
+                    bValue = new Date(b.created_at || 0);
+                    break;
+				case "events":
+					aValue = events[a.id]?.length || 0;
+					bValue = events[b.id]?.length || 0;
+					break;
+				default:
+					return 0;
+			}
+
+			if (aValue < bValue) return sortOrder === "asc" ? -1 : 1;
+			if (aValue > bValue) return sortOrder === "asc" ? 1 : -1;
+			return 0;
+		});
+	}
+
 	if (!token) {
 		return (
 			<>
@@ -93,58 +134,78 @@ export default function MyTrips({ token }) {
 				</Link>
 			</>
 		);
-	} else
-		return (
+	} else return (
 			<>
 				{trips.length > 0 && token ? (
 					<div className="MyTripsGrid">
-                    <div className="MyTripsHeader">
-                        <h2>My Trips</h2>
-                        <label 
-                    htmlFor="tripfilter"
-                    className="tripFilter">
-                        Filter Trips: 
-                        <br></br>
-					<select
-						id="tripfilter"
-						value={filter}
-						onChange={(e) => setfilter(e.target.value)}
-						style={{ marginBottom: "1rem" }}
-					>
-                        
-						<option value="all">All</option>
-						<option value="upcoming">Upcoming</option>
-						<option value="current">Current</option>
-						<option value="past">Past</option>
-                        <option value="favorites">Favorites</option>
-					</select>
-                    </label>
-                    </div>
-						{filterTrips(trips, filter).map((trip) => (
+						<div className="MyTripsHeader">
+							<h2>My Trips</h2>
+
+                            <label htmlFor="tripSort" className="tripSort">
+								Sort by:
+								<br />
+								<select
+									id="tripSort"
+									value={`${sortBy}-${sortOrder}`}
+									onChange={(e) => {
+										const [field, order] =
+											e.target.value.split("-");
+										setSortBy(field);
+										setSortOrder(order);
+									}}
+								>
+									<option value="start_date-asc">Start Date (Earliest First)</option>
+									<option value="start_date-desc">Start Date (Latest First)</option>
+									<option value="end_date-asc">End Date (Earliest First)</option>
+									<option value="end_date-desc">End Date (Latest First)</option>
+                                    <option value="created_date-asc">Created Date (Earliest First)</option>
+                                    <option value="created_date-desc">Created Date (Latest First)</option>
+									<option value="title-asc">Title (A-Z)</option>
+									<option value="title-desc">Title (Z-A)</option>
+									<option value="events-desc">Most Events First</option>
+									<option value="events-asc">Fewest Events First</option>
+								</select>
+							</label>
+
+							<label htmlFor="tripfilter" className="tripFilter">
+								Filter Trips:
+								<br></br>
+								<select
+									id="tripfilter"
+									value={filter}
+									onChange={(e) => setfilter(e.target.value)}
+								>
+									<option value="all">All</option>
+									<option value="upcoming">Upcoming</option>
+									<option value="current">Current</option>
+									<option value="past">Past</option>
+									<option value="favorites">Favorites</option>
+								</select>
+							</label>
+
+						</div>
+						{sortedAndFilteredTrips.map((trip) => (
 							<div className="MyFilteredTrips" key={trip.id}>
 								<div key={trip.id} className="tripCard">
 									<h3 className="tripTitle">{trip.title}</h3>
 									<p className="tripDates">
-										{trip.start_date ?
-                                        new Date(
+										{trip.start_date
+											? new Date(
 													trip.start_date
 											  ).toLocaleDateString()
-											: 
-                                            "N/A"}
+											: "N/A"}
 										-
-										{trip.end_date ? 
-                                        new Date(
+										{trip.end_date
+											? new Date(
 													trip.end_date
 											  ).toLocaleDateString()
-											:
-                                            "N/A"}
+											: "N/A"}
 									</p>
 									<p className="eventCounter">
 										Events:{" "}
-										{events[trip.id] ?
-                                        events[trip.id].length
-											:
-                                            0}
+										{events[trip.id]
+											? events[trip.id].length
+											: 0}
 									</p>
 									<Link to={`/trip/${trip.id}`}>
 										<p>See Trip Details</p>
