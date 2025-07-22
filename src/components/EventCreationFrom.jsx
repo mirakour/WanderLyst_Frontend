@@ -54,7 +54,7 @@ export default function EventCreationForm({ tripId, token, setShowForm }) {
             </label>
             <label className="eventForm">
             Event Date:
-            <input className="eventInput" type="date" onChange={(e) => setDate(e.target.value)} />
+            <input className="eventInput" type="datetime-local" onChange={(e) => setDate(e.target.value)} />
             </label>
             <label className="eventForm">
             Event Status:

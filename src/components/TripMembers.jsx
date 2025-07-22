@@ -50,7 +50,7 @@ export default function TripMembers({ token }) {
         tripMembers.map((member) => (
           <div key={member.id} style={{ marginBottom: "0.5rem" }}>
             <p style={{ display: "inline-block", marginRight: "1rem" }}>{member.user_email}</p>
-            <button onClick={() => handleDelete(member.id)} className="deleteTripButton">
+            <button onClick={() => handleDelete(member.id)} id="deleteTripButton">
               Delete
             </button>
           </div>
