@@ -605,10 +605,12 @@
 .MyTripsHeader{
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   background-color: #242424;
-  width: 100vw;
+  width: 100%;
+  max-width: 550px;
+  margin: auto;
   height: 80px;
   position: sticky;
   top: 180px;

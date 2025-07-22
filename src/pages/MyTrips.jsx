@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TripForm from "../components/TripForm";
 
 export default function MyTrips({ token }) {
-    const [view, setView] = useState("all");
+    const [filter, setfilter] = useState("all");
 	const [trips, setTrips] = useState([]);
 	const [events, setEvents] = useState({});
 	const [favoriteTripIds, setFavoriteTripIds] = useState([]);
@@ -60,10 +60,10 @@ export default function MyTrips({ token }) {
 		fetchTrips();
 	}, []);
 
-	// filter trips by view
-	function filterTrips(trips, view) {
+	// filter trips
+	function filterTrips(trips, filter) {
 		const now = new Date();
-		switch (view) {
+		switch (filter) {
 			case "upcoming":
 				return trips.filter((trip) => new Date(trip.start_date) > now);
 			case "current":
@@ -101,14 +101,14 @@ export default function MyTrips({ token }) {
                     <div className="MyTripsHeader">
                         <h2>My Trips</h2>
                         <label 
-                    htmlFor="tripView"
+                    htmlFor="tripfilter"
                     className="tripFilter">
                         Filter Trips: 
                         <br></br>
 					<select
-						id="tripView"
-						value={view}
-						onChange={(e) => setView(e.target.value)}
+						id="tripfilter"
+						value={filter}
+						onChange={(e) => setfilter(e.target.value)}
 						style={{ marginBottom: "1rem" }}
 					>
                         
@@ -120,7 +120,7 @@ export default function MyTrips({ token }) {
 					</select>
                     </label>
                     </div>
-						{filterTrips(trips, view).map((trip) => (
+						{filterTrips(trips, filter).map((trip) => (
 							<div className="MyFilteredTrips" key={trip.id}>
 								<div key={trip.id} className="tripCard">
 									<h3 className="tripTitle">{trip.title}</h3>
