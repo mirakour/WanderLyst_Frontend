@@ -86,7 +86,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 						Login to Plan a Trip
 					</button>
 				) : (
-					<div className="plan-trip-container">
+					<div className="trip-form-box">
 						<h2 className="plan-trip-header">{status === "edit" ? "Update Your Trip" : "Plan Your Trip"}</h2>
 						<form onSubmit={status === "edit" ? handleUpdate : handleSubmit}>
 							<label htmlFor="title" className="formLabel">

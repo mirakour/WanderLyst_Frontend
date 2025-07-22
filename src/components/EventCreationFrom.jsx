@@ -60,10 +60,10 @@ export default function EventCreationForm({ tripId, token, setShowForm }) {
             Event Status:
             <input className="eventInput" onChange={(e) => setStatus(e.target.value)} />
             </label>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1rem" }}>
+            <div className="eventButtonGroup">
             <button id="submitButton">Submit</button>
             <button id="cancelButton" onClick={handleBackButton}>Cancel</button>
-    </div>
+            </div>
   </form>
 </div>
   );
