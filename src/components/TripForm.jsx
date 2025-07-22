@@ -18,6 +18,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`,
 				},
+
 				body: JSON.stringify({
 					title: title,
 					description: description,
@@ -34,8 +35,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 				data = await res.text();
 			}
 			console.log(data);
-            setTrip(data);
-			navigate(`/trip/me`, { replace: true });
+			navigate(`/trip/${data.id}`, { replace: true });
 		} catch (err) {
 			console.error(err);
 		}
