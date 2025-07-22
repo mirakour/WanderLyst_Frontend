@@ -478,6 +478,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: #2e2e2e;
   border: 1px solid #444;
   padding: 1rem;
@@ -489,10 +490,10 @@
 .formContainer > form {
   display: flex;
   flex-direction: column;
+  align-items: start;
   background-color: #242424;
   border: 1px solid #444;
   border-radius: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -500,8 +501,8 @@
   font-size: 1.2rem;
   color: #fff;
   padding: 0.5rem 0;
-  margin: 0.5rem;
-  width: 100%;
+  margin: 0 0 0 10px;
+  width: 80%;
 }
 
 .formLabel > #description {
@@ -551,7 +552,7 @@
   align-items: center;
   padding: 1rem;
   border-radius: 10px;
-  width: 80vw;
+  width: 80%;
   max-width: 8000px;
 }
 
@@ -645,7 +646,7 @@
   border-radius: 10px;
   padding: 1.5rem;
   margin: 2rem auto 1rem auto;
-  width: 100%;
+  width: 80%;
   max-width: 600px;
 }
 
@@ -663,24 +664,7 @@
   margin: 0;
 }
 
-/* Planner Form */
-.plan-trip-container {
-  max-width: 400px;
-  margin: 0px auto 0 auto; 
-  background-color: #2e2e2e;
-  padding: 6rem;
-  border-radius: 10px;
-  border: 1px solid #555;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
 
-/* Form header */
-.plan-trip-header {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
-}
 
 /* Input fields */
 .plan-trip-container input,
