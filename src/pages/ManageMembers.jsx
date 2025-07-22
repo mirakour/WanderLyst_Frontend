@@ -81,11 +81,12 @@ export default function ManageMembers({ token }) {
       <h2>Manage Trip Members</h2>
       <form onSubmit={handleAdd}>
         <input
-          type="email"
-          placeholder="Enter member email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+            type="email"
+            placeholder="Enter member email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="manage-members-input"
         />
         <button type="submit" className="auth-button">Add Member</button>
       </form>
