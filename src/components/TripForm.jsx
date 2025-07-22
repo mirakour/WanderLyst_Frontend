@@ -34,7 +34,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 			} else {
 				data = await res.text();
 			}
-			console.log(data);
+			//console.log(data);
 			navigate(`/trip/${data.id}`, { replace: true });
 		} catch (err) {
 			console.error(err);
@@ -68,7 +68,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 			} else {
 				data = await res.text();
 			}
-			console.log(data);
+			//console.log(data);
             setTrip(data);
             setIsEditing(false);
 			navigate(`/trip/${trip.id}`, { replace: true });

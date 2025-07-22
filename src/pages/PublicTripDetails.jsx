@@ -33,11 +33,11 @@ export default function PublicTripDetails({ token }) {
 					}
 				);
 				const data = await res.json();
-				console.log(`events data = ${data}`);
-				console.log(data);
+				//console.log(`events data = ${data}`);
+				//console.log(data);
 				setEvents(data);
-				console.log(`events = ${events}`);
-				console.log(events);
+				//console.log(`events = ${events}`);
+				//console.log(events);
 			} catch (err) {
 				console.error(err);
 			}

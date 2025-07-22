@@ -52,7 +52,7 @@ export default function MyTrips({ token }) {
 					}
 				);
 				const favData = await favRes.json();
-				console.log("Favorite Data:", favData);
+				//console.log("Favorite Data:", favData);
 				setFavoriteTripIds(
 					Array.isArray(favData.favorites)
 						? favData.favorites.map((fav) => fav.trip_id)
