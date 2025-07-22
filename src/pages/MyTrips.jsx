@@ -219,7 +219,7 @@ export default function MyTrips({ token }) {
 								</div>
 							</div>
 						))}
-                    {trips.length < 2 
+                    {trips.length <= 2 
                     ? 
                     (
                     <div>
