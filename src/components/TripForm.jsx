@@ -40,7 +40,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 			console.error(err);
 		}
 	}
-
+	
 
 	async function handleUpdate(event) {
 		event.preventDefault();
