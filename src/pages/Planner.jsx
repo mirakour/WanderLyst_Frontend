@@ -34,22 +34,9 @@ export default function Planner({ token , userId }) {
 
 	return (
 		<div className="plan-trip-container">
-  			<h2 className="plan-trip-header">Plan Your Trip</h2>
-  			<form onSubmit={handleSubmit}>
-    			<label>Trip Title:</label>
-    			<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-
-    			<label>Start Date:</label>
-    			<input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-
-    			<label>End Date:</label>
-    			<input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-
-    			<label>Description:</label>
-    			<textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-
-    			<button type="submit" className="plan-trip-submit">Submit New Trip</button>
-  			</form>
+				<div className="plannerPage">
+				<TripForm token={token} status="new"/>
+				</div>
 		</div>
 	);
 }
