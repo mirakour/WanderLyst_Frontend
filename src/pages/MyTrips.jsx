@@ -141,6 +141,8 @@ export default function MyTrips({ token }) {
 						<div className="MyTripsHeader">
 							<h2>My Trips</h2>
 
+                            {trips.length > 1 ?
+                            <>
                             <label htmlFor="tripSort" className="tripSort">
 								Sort by:
 								<br />
@@ -182,7 +184,11 @@ export default function MyTrips({ token }) {
 									<option value="favorites">Favorites</option>
 								</select>
 							</label>
-
+                            </>
+                            :
+                            <>
+                            </>
+                            }
 						</div>
 						{sortedAndFilteredTrips.map((trip) => (
 							<div className="MyFilteredTrips" key={trip.id}>
@@ -213,6 +219,19 @@ export default function MyTrips({ token }) {
 								</div>
 							</div>
 						))}
+                    {trips.length < 2 
+                    ? 
+                    (
+                    <div>
+                        <Link to="/trip/new" replace>
+                            <button className="createTripButton">
+                                Create New Trip
+                            </button>
+                        </Link>
+                    </div>
+                    ):
+                    <>
+                    </>}
 					</div>
 				) : (
 					<>
