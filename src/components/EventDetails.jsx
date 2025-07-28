@@ -8,10 +8,11 @@ export default function EventDetails(passedData){
     const [showForm, setShowForm] = useState(false)
     const [newStatus, setNewStatus] = useState(null)
     const [eventDeleted, setEventDeleted] = useState(false)
+    const baseUrl = import.meta.env.VITE_API_URL;
 
     async function getEvent() {
         try{
-            const response = await fetch(`http://localhost:3000/api/events/${id}`,{
+            const response = await fetch(`${baseUrl}/api/events/${id}`,{
                 headers: { 
                     "Authorization":  `Bearer ${passedData.token}`
                 }
@@ -31,7 +32,7 @@ export default function EventDetails(passedData){
     async function handleSubmit(event) {
         event.preventDefault()
         try{
-            const response = await fetch(`http://localhost:3000/api/events/${id}`,{
+            const response = await fetch(`${baseUrl}/api/events/${id}`,{
                 method: "PUT", 
                 headers: { 
                     "Content-Type": "application/json",
@@ -51,7 +52,7 @@ export default function EventDetails(passedData){
     async function deleteEvent(event) {
         event.preventDefault()
         try{
-            const response = await fetch(`http://localhost:3000/api/events/${id}`,{
+            const response = await fetch(`${baseUrl}/api/events/${id}`,{
                 method: "DELETE", 
                 headers: { 
                     "Content-Type": "application/json",

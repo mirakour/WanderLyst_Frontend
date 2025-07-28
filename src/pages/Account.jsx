@@ -6,11 +6,12 @@ export default function Account({ token }) {
 	const [user, setUser] = useState({});
 	const [view, setView] = useState("all");
 	const navigate = useNavigate();
+	const baseUrl = import.meta.env.VITE_API_URL;
 
 	useEffect(() => {
 		const fetchTrips = async () => {
 			try {
-				const res = await fetch("http://localhost:3000/api/user/me", {
+				const res = await fetch("${baseUrl}/api/user/me", {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				const data = await res.json();

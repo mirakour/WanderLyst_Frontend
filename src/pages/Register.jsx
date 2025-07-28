@@ -7,12 +7,13 @@ export default function Register({ setToken }) {
   const [email, setEmail] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch("${baseUrl}/auth/register", {
         method: "POST",
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ email, name, password })

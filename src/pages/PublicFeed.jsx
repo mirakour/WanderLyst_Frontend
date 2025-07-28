@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 export default function publicFeed(){
     const [trips, setTrips] = useState([])
+    const baseUrl = import.meta.env.VITE_API_URL;
     
     useEffect(()=>{
         const fetchTrips = async () => {
         try {
-            const res = await fetch("http://localhost:3000/api/trip/public");
+            const res = await fetch("${baseUrl}/api/trip/public");
             const data = await res.json();
             setTrips(data);
         } catch (err) {

@@ -6,10 +6,11 @@ export default function Events(passedData){
     const [message, setMessage] = useState(null)
     const [eventsList, setEventsList] = useState([]) //this varible holds a list of all the events
     const [showForm, setShowForm] = useState(false)
+    const baseUrl = import.meta.env.VITE_API_URL;
    
     async function getEvents() {
         try{
-            const response = await fetch(`http://localhost:3000/api/trip/${passedData.tripId}/events`,{
+            const response = await fetch(`${baseUrl}/api/trip/${passedData.tripId}/events`,{
                 headers: { 
                     "Authorization":  `Bearer ${passedData.token}`
                 }

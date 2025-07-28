@@ -6,12 +6,13 @@ export default function EventCreationForm({ tripId, token, setShowForm }) {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("");
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3000/api/trip/${tripId}/events`, {
+      const response = await fetch(`${baseUrl}/api/trip/${tripId}/events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
