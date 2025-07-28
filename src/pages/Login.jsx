@@ -6,12 +6,13 @@ export default function Login({ token, setToken, userId, setUserId }) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch("${baseUrl}/auth/login", {
         method: "POST",
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ email, password })

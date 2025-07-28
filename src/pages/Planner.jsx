@@ -7,12 +7,13 @@ export default function Planner({ token , userId }) {
 	const [description, setDescription] = useState();
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
+	const baseUrl = import.meta.env.VITE_API_URL;
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
 		try {
-			const res = await fetch(`http://localhost:3000/api/trip`, {
+			const res = await fetch(`${baseUrl}/api/trip`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

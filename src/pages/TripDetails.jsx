@@ -11,6 +11,7 @@ export default function TripDetails({ token }) {
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	const [favorite, setFavorite] = useState(null);
+	const baseUrl = import.meta.env.VITE_API_URL;
 
 	useEffect(() => {
 		//console.log("TOKEN at TripDetails:", token);
@@ -18,7 +19,7 @@ export default function TripDetails({ token }) {
 		const fetchTrip = async () => {
 			try {
 				const res = await fetch(
-					`http://localhost:3000/api/trip/${id}`,
+					`${baseUrl}/api/trip/${id}`,
 					{
 						headers: { Authorization: `Bearer ${token}` },
 					}
@@ -33,7 +34,7 @@ export default function TripDetails({ token }) {
 		const fetchFavoritesStatus = async () => {
 			try {
 				const res = await fetch(
-					`http://localhost:3000/api/favorites/${id}`,
+					`${baseUrl}/api/favorites/${id}`,
 					{
 						headers: { Authorization: `Bearer ${token}` },
 					}
@@ -58,7 +59,7 @@ export default function TripDetails({ token }) {
 
 	async function deleteTrip() {
 		try {
-			const res = await fetch(`http://localhost:3000/api/trip/${id}`, {
+			const res = await fetch(`${baseUrl}/api/trip/${id}`, {
 				method: "DELETE",
 				headers: { Authorization: `Bearer ${token}` },
 			});
@@ -73,7 +74,7 @@ export default function TripDetails({ token }) {
 	async function favoriteTrip() {
 		try {
 			const res = await fetch(
-				`http://localhost:3000/api/favorites/${id}`,
+				`${baseUrl}/api/favorites/${id}`,
 				{
 					method: "POST",
 					headers: { Authorization: `Bearer ${token}` },
@@ -87,7 +88,7 @@ export default function TripDetails({ token }) {
 	async function unfavoriteTrip() {
 		try {
 			const res = await fetch(
-				`http://localhost:3000/api/favorites/${id}`,
+				`${baseUrl}/api/favorites/${id}`,
 				{
 					method: "DELETE",
 					headers: { Authorization: `Bearer ${token}` },
@@ -102,8 +103,8 @@ export default function TripDetails({ token }) {
 		setLoading(true);
 		try {
 			const endpoint = trip.public_shared
-				? `http://localhost:3000/api/trip/${id}/private`
-				: `http://localhost:3000/api/trip/${id}/public`;
+				? `${baseUrl}/api/trip/${id}/private`
+				: `${baseUrl}/api/trip/${id}/public`;
 			const res = await fetch(endpoint, {
 				method: "PATCH",
 				headers: { Authorization: `Bearer ${token}` },

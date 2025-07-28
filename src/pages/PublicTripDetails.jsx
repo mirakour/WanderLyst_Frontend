@@ -5,13 +5,14 @@ export default function PublicTripDetails({ token }) {
 	const { id } = useParams();
 	const [trip, setTrip] = useState({});
 	const [events, setEvents] = useState([]);
+	const baseUrl = import.meta.env.VITE_API_URL;
 
 	useEffect(() => {
 		//Define Trip
 		const fetchTrips = async () => {
 			try {
 				const res = await fetch(
-					`http://localhost:3000/api/trip/public/${id}`,
+					`${baseUrl}/api/trip/public/${id}`,
 					{
 						headers: { Authorization: `Bearer ${token}` },
 					}
@@ -27,7 +28,7 @@ export default function PublicTripDetails({ token }) {
 		const fetchEvents = async () => {
 			try {
 				const res = await fetch(
-					`http://localhost:3000/api/trip/public/${id}/events`,
+					`${baseUrl}/api/trip/public/${id}/events`,
 					{
 						headers: { Authorization: `Bearer ${token}` },
 					}

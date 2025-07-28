@@ -2,31 +2,71 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function EventDetails(passedData) {
-	const { id } = useParams();
-	const [singleEvent, setSingleEvent] = useState(null);
-	const [showForm, setShowForm] = useState(false);
-	const [newStatus, setNewStatus] = useState(null);
-	const [eventDeleted, setEventDeleted] = useState(false);
 
-	async function getEvent() {
-		try {
-			const response = await fetch(
-				`http://localhost:3000/api/events/${id}`,
-				{
-					headers: {
-						Authorization: `Bearer ${passedData.token}`,
-					},
-				}
-			);
-			const rawData = await response.json();
+export default function EventDetails(passedData){
+    const { id } = useParams()
+    const [singleEvent, setSingleEvent] = useState(null)
+    const [showForm, setShowForm] = useState(false)
+    const [newStatus, setNewStatus] = useState(null)
+    const [eventDeleted, setEventDeleted] = useState(false)
+    const baseUrl = import.meta.env.VITE_API_URL;
 
-			setSingleEvent(rawData);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+    async function getEvent() {
+        try{
+            const response = await fetch(`${baseUrl}/api/events/${id}`,{
+                headers: { 
+                    "Authorization":  `Bearer ${passedData.token}`
+                }
+            })
+            const rawData = await response.json()
+            
+            setSingleEvent(rawData)
+        }catch (error){
+            console.error(error)
+        }
+    }
 
+
+    async function handleSubmit(event) {
+        event.preventDefault()
+        try{
+            const response = await fetch(`${baseUrl}/api/events/${id}`,{
+                method: "PUT", 
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization":  `Bearer ${passedData.token}`
+                }, 
+                body: JSON.stringify({ 
+                    status: newStatus
+                })
+            })
+            const rawData = await response.json()
+            closeForm()
+        }catch (error){
+            console.error(error)
+        }
+    }
+
+    async function deleteEvent(event) {
+        event.preventDefault()
+        try{
+            const response = await fetch(`${baseUrl}/api/events/${id}`,{
+                method: "DELETE", 
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization":  `Bearer ${passedData.token}`
+                }, 
+                body: JSON.stringify({ 
+                    id: id
+                })
+            })
+            const rawData = await response.json()
+            setEventDeleted(true)
+        }catch (error){
+            console.error(error)
+        }
+    }
+  
 	useEffect(() => {
 		getEvent();
 	}, [showForm]);
@@ -53,6 +93,7 @@ export default function EventDetails(passedData) {
 			console.error(error);
 		}
 	}
+
 
 	async function deleteEvent(event) {
 		event.preventDefault();

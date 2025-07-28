@@ -7,12 +7,13 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 	const [startDate, setStartDate] = useState(trip?.start_date ? trip.start_date.slice(0, 10) : "");
 	const [endDate, setEndDate] = useState(trip?.end_date ? trip.end_date.slice(0, 10) : "");
 	const navigate = useNavigate();
+	const baseUrl = import.meta.env.VITE_API_URL;
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
 		try {
-			const res = await fetch(`http://localhost:3000/api/trip`, {
+			const res = await fetch(`${baseUrl}/api/trip`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -46,7 +47,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 		event.preventDefault();
 
 		try {
-			const res = await fetch(`http://localhost:3000/api/trip/${trip.id}`, {
+			const res = await fetch(`${baseUrl}/api/trip/${trip.id}`, {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",
@@ -86,7 +87,7 @@ export default function TripForm({ token , status , trip , setTrip , setIsEditin
 						Login to Plan a Trip
 					</button>
 				) : (
-					<div className="plan-trip-container">
+					<div className="trip-form-box">
 						<h2 className="plan-trip-header">{status === "edit" ? "Update Your Trip" : "Plan Your Trip"}</h2>
 						<form onSubmit={status === "edit" ? handleUpdate : handleSubmit}>
 							<label htmlFor="title" className="formLabel">

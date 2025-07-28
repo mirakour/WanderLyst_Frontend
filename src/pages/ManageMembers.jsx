@@ -6,6 +6,7 @@ export default function ManageMembers({ token }) {
   const navigate = useNavigate();
   const [members, setMembers] = useState([]);
   const [email, setEmail] = useState("");
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     //console.log("TOKEN IN ManageMembers:", token);
@@ -14,7 +15,7 @@ export default function ManageMembers({ token }) {
 
   const fetchMembers = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/trip/${id}/members`, {
+      const res = await fetch(`${baseUrl}/api/trip/${id}/members`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) {
@@ -39,7 +40,7 @@ export default function ManageMembers({ token }) {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:3000/api/trip/${id}/members`, {
+      const res = await fetch(`${baseUrl}/api/trip/${id}/members`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +62,7 @@ export default function ManageMembers({ token }) {
 
   const handleDelete = async (memberId) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/trip/${id}/members/${memberId}`, {
+      const res = await fetch(`${baseUrl}/api/trip/${id}/members/${memberId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

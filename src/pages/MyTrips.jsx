@@ -12,6 +12,7 @@ export default function MyTrips({ token }) {
 
     const filteredTrips = filterTrips(trips, filter);
     const sortedAndFilteredTrips = sortTrips(filteredTrips, sortBy, sortOrder);
+	const baseUrl = import.meta.env.VITE_API_URL;
 
 
 	useEffect(() => {
@@ -19,7 +20,7 @@ export default function MyTrips({ token }) {
 			try {
 				//Define Trips
 				const tripsRes = await fetch(
-					"http://localhost:3000/api/trip/mytrips",
+					"${baseUrl}/api/trip/mytrips",
 					{ headers: { Authorization: `Bearer ${token}` } }
 				);
 				const tripsData = await tripsRes.json();
@@ -28,7 +29,7 @@ export default function MyTrips({ token }) {
 				// Define events for each trip
 				const eventsPromises = tripsData.map(async (trip) => {
 					const eventsRes = await fetch(
-						`http://localhost:3000/api/trip/${trip.id}/events`,
+						`${baseUrl}/api/trip/${trip.id}/events`,
 						{
 							headers: { Authorization: `Bearer ${token}` },
 						}
@@ -46,7 +47,7 @@ export default function MyTrips({ token }) {
 
 				// Set favorite status for each trip
 				const favRes = await fetch(
-					"http://localhost:3000/api/favorites",
+					"${baseUrl}/api/favorites",
 					{
 						headers: { Authorization: `Bearer ${token}` },
 					}

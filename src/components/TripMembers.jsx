@@ -5,10 +5,11 @@ export default function TripMembers({ token }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [tripMembers, setTripMembers] = useState([]);
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const fetchTripMembers = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/trip/${id}/members`, {
+      const res = await fetch(`${baseUrl}/api/trip/${id}/members`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) {
@@ -27,7 +28,7 @@ export default function TripMembers({ token }) {
 
   const handleDelete = async (memberId) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/trip/${id}/members/${memberId}`, {
+      const res = await fetch(`${baseUrl}/api/trip/${id}/members/${memberId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
