@@ -9,7 +9,7 @@ export default function ManageMembers({ token }) {
   const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    console.log("TOKEN IN ManageMembers:", token);
+    //console.log("TOKEN IN ManageMembers:", token);
     fetchMembers();
   }, [id, token]);
 

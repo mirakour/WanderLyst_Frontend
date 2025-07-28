@@ -27,7 +27,7 @@ export default function Planner({ token , userId }) {
 				}),
 			});
 			const data = await res.json();
-			console.log(data);
+			//console.log(data);
 		} catch (err) {
 			console.error(err);
 		}

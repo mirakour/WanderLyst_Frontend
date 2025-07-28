@@ -61,7 +61,7 @@
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
-  min-width: 200px;
+  min-width: 350px;
 }
 
 .navbar-center {
@@ -78,6 +78,7 @@
   font-weight: bold;
   margin: 0;
   padding: 0;
+  min-width: 100px;
 }
 
 .navbar-center img {
@@ -88,7 +89,6 @@
 .navbar-center h1 {
   font-size: 1.8rem;
   font-weight: bold;
-  margin-left: 0.5rem;
 }
 
 .navbar-right {
@@ -97,7 +97,7 @@
   justify-content: flex-end;
   gap: 1rem;
   flex-shrink: 0;
-  min-width: 180px;
+  min-width: 350px;
   white-space: nowrap;
 }
 
@@ -502,7 +502,7 @@
   font-size: 1.2rem;
   color: #fff;
   padding: 0.5rem 0;
-  margin: auto;
+  margin: 0 auto 0 auto;
   width: 80%;
 }
 
@@ -552,9 +552,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
   border-radius: 10px;
-  width: 80%;
+  width: 100%;
   max-width: 8000px;
 }
 
@@ -640,6 +639,8 @@
 }
 
 .tripDetailsHeader {
+  position: sticky;
+  top: 55px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -680,9 +681,9 @@
 /* Input fields */
 .plan-trip-container input,
 .plan-trip-container textarea {
-  width: 100%;
+  width: 90%;
   padding: 1rem;
-  margin: 0.5rem 0;
+  margin: auto;
   border: 1px solid #444;
   border-radius: 5px;
   background-color: #1e1e1e;

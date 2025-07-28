@@ -18,7 +18,7 @@ export default function publicFeed(){
         }
         fetchTrips();
     }, []);
-    console.log(trips)
+    //console.log(trips)
 
     return(
         <>
